@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { authLogin } from "@/services/core/api";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,28 +15,44 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Lock, User, ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Lock, User, ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     nama: "",
     password: "",
   });
 
-  // State untuk toggle lihat password
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Login attempt:", formData);
-  };
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const result = await authLogin(formData.nama, formData.password);
+      const role = result.data.role;
+      if (role === "PESERTA") {
+        router.push("/rally");
+      } else if (role === "PENPOS") {
+        router.push("/pos");
+      } else {
+        alert("Role tidak dikenali, hubungi panitia!");
+      }
+    } catch (errorMessage) {
+      alert(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,8 +61,6 @@ export default function LoginPage() {
       <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 blur-3xl"></div>
       <div className="absolute left-1/3 top-1/3 h-[300px] w-[300px] rounded-full bg-cyan-500/10 blur-3xl"></div>
       <div className="absolute bottom-1/4 right-1/3 h-[400px] w-[400px] rounded-full bg-blue-500/10 blur-3xl"></div>
-
-      {/* Noise Texture Overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-30"></div>
 
       {/* Login Card */}
@@ -81,7 +97,8 @@ export default function LoginPage() {
                   value={formData.nama}
                   onChange={handleChange}
                   required
-                  className="border-white/10 bg-zinc-950/50 pl-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20"
+                  disabled={loading}
+                  className="border-white/10 bg-zinc-950/50 pl-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
                 />
               </div>
             </div>
@@ -99,21 +116,21 @@ export default function LoginPage() {
                 <Input
                   id="password"
                   name="password"
-                  // Logika toggle type disini (text/password)
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  // Tambah padding kanan (pr-10) agar teks tidak menabrak ikon mata
-                  className="border-white/10 bg-zinc-950/50 pl-10 pr-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20"
+                  disabled={loading} // Disable saat loading
+                  className="border-white/10 bg-zinc-950/50 pl-10 pr-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
                 />
 
                 {/* Tombol Toggle Mata */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors focus:outline-none"
+                  disabled={loading}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors focus:outline-none disabled:opacity-50"
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -128,7 +145,7 @@ export default function LoginPage() {
             <div className="flex justify-end">
               <Link
                 href="/forgot-password"
-                className="text-sm text-cyan-400 transition-colors hover:text-cyan-300"
+                className="text-sm text-cyan-400 transition-colors hover:text-cyan-300 pointer-events-auto"
               >
                 Lupa password?
               </Link>
@@ -139,12 +156,22 @@ export default function LoginPage() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="group relative w-full overflow-hidden border-cyan-500/50 bg-gradient-to-r from-cyan-500 to-blue-500 py-6 text-base font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40 hover:shadow-xl"
+              disabled={loading}
+              className="group relative w-full overflow-hidden border-cyan-500/50 bg-gradient-to-r from-cyan-500 to-blue-500 py-6 text-base font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70"
             >
-              <span className="relative z-10 flex items-center justify-center">
-                Masuk
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                {loading ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Memproses...
+                  </>
+                ) : (
+                  "Masuk"
+                )}
               </span>
-              <div className="absolute inset-0 -z-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100"></div>
+              {!loading && (
+                <div className="absolute inset-0 -z-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100"></div>
+              )}
             </Button>
 
             {/* Divider */}
@@ -160,7 +187,9 @@ export default function LoginPage() {
             {/* Back to Home Link */}
             <Link
               href="/"
-              className="group flex w-full items-center justify-center space-x-2 text-sm text-zinc-400 transition-colors hover:text-cyan-400"
+              className={`group flex w-full items-center justify-center space-x-2 text-sm text-zinc-400 transition-colors hover:text-cyan-400 ${
+                loading ? "pointer-events-none opacity-50" : ""
+              }`}
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               <span>Kembali ke Beranda</span>
@@ -171,7 +200,9 @@ export default function LoginPage() {
               Belum punya akun?{" "}
               <Link
                 href="/register"
-                className="font-semibold text-cyan-400 transition-colors hover:text-cyan-300"
+                className={`font-semibold text-cyan-400 transition-colors hover:text-cyan-300 ${
+                  loading ? "pointer-events-none opacity-50" : ""
+                }`}
               >
                 Daftar sekarang
               </Link>
