@@ -1,9 +1,10 @@
 // Perhatikan path import di bawah ini sudah disesuaikan
-import Navbar from "@/components/shared/Dashboard/Navbar/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
+import Providers from "@/core/store/Providers";
 
 export const metadata = {
-  title: "Brand Website",
+  title: "CEG - Chemical Engineering Games",
   description: "Website keren buatan Riyan",
 };
 
@@ -11,9 +12,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <body className="bg-zinc-950 text-white antialiased">
-        {/* Navbar dipanggil dari folder Dashboard */}
-        <Navbar />
-        <main>{children}</main>
+        <Providers>
+          <main>{children}</main>
+        </Providers>
+        <Toaster />
       </body>
     </html>
   );
