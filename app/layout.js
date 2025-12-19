@@ -13,7 +13,6 @@ export default function RootLayout({ children }) {
       <body className="bg-zinc-950 text-white antialiased">
         {/* Navbar dipanggil dari folder Dashboard */}
         <Navbar />
-
         <main>{children}</main>
       </body>
     </html>
