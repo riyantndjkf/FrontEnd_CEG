@@ -1,5 +1,6 @@
 import HomePageAdmin from '@/views/homepage/HomePageAdmin'
 import React from 'react'
+import RoleGuard from '@/components/shared/RoleGuard'
 
 export const metadata = {
     title: "Admin",
@@ -7,5 +8,9 @@ export const metadata = {
 };
 
 export default function Admin() {
-    return <HomePageAdmin />
+    return (
+        <RoleGuard allowedRoles={["ADMIN"]}>
+            <HomePageAdmin />
+        </RoleGuard>
+    )
 }
