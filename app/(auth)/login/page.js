@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { authLogin } from "@/services/core/api";
+import { auth, penpos } from "@/core/services/api";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,44 +16,69 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, User, ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { setToken } from "@/core/feature/token/tokenSlice";
+import { toast } from "sonner";
+import { setUser } from "@/core/feature/user/userSlice";
+import { setRole } from "@/core/feature/role/roleSlice";
+import useSWR from "swr";
+
+const loginSchema = Yup.object({
+  nama: Yup.string().required("Nama harus diisi"),
+  password: Yup.string().required("Password harus diisi"),
+});
 
 export default function LoginPage() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const [formData, setFormData] = useState({
-    nama: "",
-    password: "",
+  const formik = useFormik({
+    initialValues: {
+      nama: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      const credentials = `${values.nama}:${values.password}`;
+      const base64Credentials = typeof window !== 'undefined' ? btoa(credentials) : '';
+      const data = { nama: values.nama, password: values.password };
+
+      try {
+        const response = await auth.login(data, base64Credentials);
+        const access_token = response?.data?.data?.token;
+        const username = response?.data?.data?.nama_tim;
+        const role = response?.data?.data?.role;
+
+        if (access_token) {
+          dispatch(setToken({ token: access_token }));
+          dispatch(setUser(username));
+          dispatch(setRole(role));
+
+          toast.success(`Selamat datang, ${username || 'User'}!`);
+
+          const nextPath = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('from') : null;
+          if (role === 'PESERTA') {
+            router.push(nextPath || '/')
+          } else if (role === 'ADMIN') {
+            router.push('/admin')
+          } else if (role === 'PENPOS') {
+
+            router.push('/pos')
+          }
+        } else {
+          toast.error("Login gagal: token tidak ditemukan");
+        }
+      } catch (error) {
+        const msg = error?.response?.data?.message || error?.message || 'Login gagal, silahkan coba lagi';
+        if (typeof window !== 'undefined') toast.error(msg);
+      }
+    },
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const result = await authLogin(formData.nama, formData.password);
-      const role = result.data.role;
-      if (role === "PESERTA") {
-        router.push("/rally");
-      } else if (role === "PENPOS") {
-        router.push("/pos");
-      } else {
-        alert("Role tidak dikenali, hubungi panitia!");
-      }
-    } catch (errorMessage) {
-      alert(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { handleSubmit, values, touched, errors } = formik;
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12">
@@ -94,12 +119,15 @@ export default function LoginPage() {
                   name="nama"
                   type="text"
                   placeholder="Masukkan nama kamu"
-                  value={formData.nama}
-                  onChange={handleChange}
-                  required
-                  disabled={loading}
+                  value={values.nama}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  disabled={formik.isSubmitting}
                   className="border-white/10 bg-zinc-950/50 pl-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
                 />
+                {touched.nama && errors.nama && (
+                  <p className="text-sm text-red-400 mt-1">{errors.nama}</p>
+                )}
               </div>
             </div>
 
@@ -111,25 +139,28 @@ export default function LoginPage() {
               >
                 Password
               </Label>
-              <div className="relative">
+              <div className="relative mb-5">
                 <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500" />
                 <Input
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  disabled={loading} // Disable saat loading
+                  value={values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  disabled={formik.isSubmitting}
                   className="border-white/10 bg-zinc-950/50 pl-10 pr-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
                 />
+                {touched.password && errors.password && (
+                  <p className="text-sm text-red-400 mt-1">{errors.password}</p>
+                )}
 
                 {/* Tombol Toggle Mata */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  disabled={loading}
+                  disabled={formik.isSubmitting}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors focus:outline-none disabled:opacity-50"
                 >
                   {showPassword ? (
@@ -140,27 +171,17 @@ export default function LoginPage() {
                 </button>
               </div>
             </div>
-
-            {/* Forgot Password Link */}
-            <div className="flex justify-end">
-              <Link
-                href="/forgot-password"
-                className="text-sm text-cyan-400 transition-colors hover:text-cyan-300 pointer-events-auto"
-              >
-                Lupa password?
-              </Link>
-            </div>
           </CardContent>
 
           <CardFooter className="flex flex-col space-y-4">
             {/* Submit Button */}
             <Button
               type="submit"
-              disabled={loading}
+              disabled={formik.isSubmitting}
               className="group relative w-full overflow-hidden border-cyan-500/50 bg-gradient-to-r from-cyan-500 to-blue-500 py-6 text-base font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                {loading ? (
+                {formik.isSubmitting ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
                     Memproses...
@@ -169,7 +190,7 @@ export default function LoginPage() {
                   "Masuk"
                 )}
               </span>
-              {!loading && (
+              {!formik.isSubmitting && (
                 <div className="absolute inset-0 -z-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100"></div>
               )}
             </Button>
@@ -187,9 +208,8 @@ export default function LoginPage() {
             {/* Back to Home Link */}
             <Link
               href="/"
-              className={`group flex w-full items-center justify-center space-x-2 text-sm text-zinc-400 transition-colors hover:text-cyan-400 ${
-                loading ? "pointer-events-none opacity-50" : ""
-              }`}
+              className={`group flex w-full items-center justify-center space-x-2 text-sm text-zinc-400 transition-colors hover:text-cyan-400 ${formik.isSubmitting ? "pointer-events-none opacity-50" : ""
+                }`}
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               <span>Kembali ke Beranda</span>
@@ -200,9 +220,8 @@ export default function LoginPage() {
               Belum punya akun?{" "}
               <Link
                 href="/register"
-                className={`font-semibold text-cyan-400 transition-colors hover:text-cyan-300 ${
-                  loading ? "pointer-events-none opacity-50" : ""
-                }`}
+                className={`font-semibold text-cyan-400 transition-colors hover:text-cyan-300 ${formik.isSubmitting ? "pointer-events-none opacity-50" : ""
+                  }`}
               >
                 Daftar sekarang
               </Link>

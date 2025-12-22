@@ -175,18 +175,16 @@ export default function RallyPage() {
                   className={`
                     group relative overflow-hidden transition-all duration-300
                     bg-zinc-900/40 backdrop-blur-md border border-zinc-800
-                    ${
-                      isInteractive
-                        ? `${typeGlow} cursor-pointer`
-                        : "opacity-60 cursor-not-allowed grayscale-[0.5]"
+                    ${isInteractive
+                      ? `${typeGlow} cursor-pointer`
+                      : "opacity-60 cursor-not-allowed grayscale-[0.5]"
                     }
                   `}
                 >
                   {/* Subtle Gradient Overlay */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${
-                      isBattle ? "from-indigo-500/5" : "from-emerald-500/5"
-                    } to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-br ${isBattle ? "from-indigo-500/5" : "from-emerald-500/5"
+                      } to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                   />
 
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
@@ -221,11 +219,10 @@ export default function RallyPage() {
 
                   <CardFooter className="pt-4">
                     <Button
-                      className={`w-full group/btn ${
-                        isBattle
+                      className={`w-full group/btn ${isBattle
                           ? "hover:bg-indigo-600"
                           : "hover:bg-emerald-600"
-                      }`}
+                        }`}
                       variant={isInteractive ? "default" : "secondary"}
                       disabled={!isInteractive}
                     >
