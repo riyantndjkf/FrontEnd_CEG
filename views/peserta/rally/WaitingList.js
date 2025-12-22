@@ -94,7 +94,7 @@ export default function WaitingListView() {
             try {
                 const response = await API.rally.checkAcc();
 
-                if (response.ok === "200") {
+                if (response?.data?.success === true) {
                     router.push(`/rally/${currentPostId}/battle-abn`);
                 }
 
