@@ -1,5 +1,5 @@
 "use client";
-import React, {useState}from 'react'
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -13,226 +13,490 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  User, School, Mail, Phone, Hash, Users, 
-  Image as ImageIcon, CreditCard, ArrowLeft, ArrowRight, Loader2, AlertCircle 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Users,
+  CreditCard,
+  ArrowLeft,
+  ArrowRight,
+  Loader2,
 } from "lucide-react";
+
+/* =====================
+   STYLE INPUT (GLOBAL)
+===================== */
+const inputClass =
+  "bg-zinc-900 border-white/10 text-white placeholder:text-zinc-500 " +
+  "focus-visible:ring-2 focus-visible:ring-cyan-500/40 focus-visible:border-cyan-500/40";
+
+const fileInputClass =
+  "bg-zinc-900 border-dashed border-zinc-700 text-white " +
+  "file:text-white file:bg-transparent";
 
 export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1); 
+  const [step, setStep] = useState(1);
+  const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  // State untuk data kelompok
+
   const [groupData, setGroupData] = useState({
     namaKelompok: "",
+    password:"",
     asalSekolah: "",
     email: "",
-    noWa: "",
+    noTelp: "",
     idLine: "",
-    buktiBayar: null,
   });
 
-  // State untuk data 3 anggota
   const [members, setMembers] = useState([
-    { nama: "", foto: null, kartuPelajar: null, followCeg: null, followTk: null, alergi: "", penyakit: "", polaMakan: "normal" },
-    { nama: "", foto: null, kartuPelajar: null, followCeg: null, followTk: null, alergi: "", penyakit: "", polaMakan: "normal" },
-    { nama: "", foto: null, kartuPelajar: null, followCeg: null, followTk: null, alergi: "", penyakit: "", polaMakan: "normal" },
+    { nama: "", alergi: "", penyakit: "", polaMakan: "normal" },
+    { nama: "", alergi: "", penyakit: "", polaMakan: "normal" },
+    { nama: "", alergi: "", penyakit: "", polaMakan: "normal" },
   ]);
 
-  const handleGroupChange = (e) => {
+  const handleGroupChange = (e) =>
     setGroupData({ ...groupData, [e.target.name]: e.target.value });
-  };
 
-  const handleMemberChange = (index, field, value) => {
-    const updatedMembers = [...members];
-    updatedMembers[index][field] = value;
-    setMembers(updatedMembers);
+  const handleMemberChange = (i, field, val) => {
+    const copy = [...members];
+    copy[i][field] = val;
+    setMembers(copy);
   };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    // Logic API integration di sini
-    console.log({ groupData, members });
     setTimeout(() => {
       setLoading(false);
-      alert("Pendaftaran berhasil (Simulasi)");
-      router.push("/login");
-    }, 2000);
+      setSuccess(true);
+    }, 1500);
   };
-
-  return (
-    //<div>Register</div>
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12">
-      {/* Background Decor (Sama dengan Login) */}
+  return(
+    <div className="relative flex min-h-screen items-center justify-center px-4 py-12">
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-950 to-zinc-900"></div>
-      <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 blur-3xl"></div>
 
-      <Card className="relative z-10 w-full max-w-4xl border-white/10 bg-zinc-900/40 shadow-2xl backdrop-blur-xl">
+      <Card className="relative z-10 w-full max-w-4xl border-white/10 bg-zinc-900/40 backdrop-blur-xl">
         <CardHeader>
           <div className="flex justify-between items-center">
-             <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
-               Pendaftaran Tim CEG
-             </CardTitle>
-             <span className="text-xs text-zinc-500 font-mono">STEP {step} OF 3</span>
+            <CardTitle className="text-2xl font-bold text-white">
+              Pendaftaran Tim CEG
+            </CardTitle>
+            <span className="text-xs text-zinc-500">STEP {step} OF 3</span>
           </div>
-          <CardDescription>Lengkapi data kelompok dan anggota kamu</CardDescription>
+          <CardDescription>
+            Lengkapi data kelompok dan anggota
+          </CardDescription>
         </CardHeader>
 
         <form onSubmit={handleSubmit}>
-          <CardContent className="max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-            
-            {/* STEP 1: INFORMASI KELOMPOK */}
+          <CardContent className="space-y-6 max-h-[60vh] overflow-y-auto">
+            {/* STEP 1 */}
             {step === 1 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in duration-500">
-                <div className="space-y-2">
+              <div className="grid md:grid-cols-2 gap-4">
+
+                <div>
                   <Label>Nama Kelompok</Label>
-                  <Input name="namaKelompok" placeholder="Nama tim" onChange={handleGroupChange} className="bg-zinc-950/50 border-white/10" required />
+                  <h4 className="text-cyan-400 flex items-center gap-2">
+                    Nama Tim
+                  </h4>
+                  <Input
+                    name="namaKelompok"
+                    placeholder="Nama Tim"
+                    onChange={handleGroupChange}
+                    className={inputClass}
+                    required
+                  />
                 </div>
-                <div className="space-y-2">
+
+                <div>
+                  <Label>Password</Label>
+                  <h4 className="text-cyan-400 flex items-center gap-2">
+                    Password
+                  </h4>
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Masukkan password"
+                      onChange={handleGroupChange}
+                      className={inputClass + " pr-10"}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-cyan-400"
+                    >
+                      {showPassword ? "🙈" : "👁️"}
+                    </button>
+                  </div>
+                </div>
+
+                <div>
                   <Label>Asal Sekolah</Label>
-                  <Input name="asalSekolah" placeholder="SMA..." onChange={handleGroupChange} className="bg-zinc-950/50 border-white/10" required />
+                  <h4 className="text-cyan-400 flex items-center gap-2">
+                    Asal Sekolah
+                  </h4>
+                  <Input
+                    name="asalSekolah"
+                    placeholder="Asal Sekolah"
+                    onChange={handleGroupChange}
+                    className={inputClass}
+                    required
+                  />
                 </div>
-                <div className="space-y-2">
+
+                <div>
                   <Label>Email</Label>
-                  <Input type="email" name="email" placeholder="email@gmail.com" onChange={handleGroupChange} className="bg-zinc-950/50 border-white/10" required />
+                  <h4 className="text-cyan-400 flex items-center gap-2">
+                    Email
+                  </h4>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="email@gmail.com"
+                    onChange={handleGroupChange}
+                    className={inputClass}
+                    required
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label>No. WhatsApp</Label>
-                  <Input name="noWa" placeholder="08..." onChange={handleGroupChange} className="bg-zinc-950/50 border-white/10" required />
+
+                <div>
+                  <Label>No Telp</Label>
+                  <h4 className="text-cyan-400 flex items-center gap-2">
+                    No Telp
+                  </h4>
+                  <Input
+                    name="noTelp"
+                    placeholder="No Telp"
+                    onChange={handleGroupChange}
+                    className={inputClass}
+                    required
+                  />
                 </div>
-                <div className="space-y-2 md:col-span-2">
+
+                <div className="md:col-span-2">
                   <Label>ID Line</Label>
-                  <Input name="idLine" placeholder="ID Line" onChange={handleGroupChange} className="bg-zinc-950/50 border-white/10" required />
+                  <h4 className="text-cyan-400 flex items-center gap-2">
+                    ID Line
+                  </h4>
+                  <Input
+                    name="idLine"
+                    placeholder="ID Line"
+                    onChange={handleGroupChange}
+                    className={inputClass}
+                    required
+                  />
                 </div>
 
-                <div className="md:col-span-2 p-4 mt-4 rounded-lg bg-zinc-950/50 border border-cyan-500/20">
-                    <h4 className="text-cyan-400 font-semibold mb-2 flex items-center gap-2"><CreditCard className="w-4 h-4"/> Informasi Pembayaran</h4>
-                    <p className="text-xs text-zinc-400">BCA: 5105390707 (a.n Bierley)</p>
-                    <p className="text-xs text-zinc-400 mb-3 italic">*Keterangan: Nama Kelompok_Asal Sekolah</p>
-                    <Label className="text-xs">Upload Bukti Bayar</Label>
-                    <Input type="file" className="bg-zinc-900 border-dashed border-zinc-700 mt-1" />
+                <div className="md:col-span-2 p-4 rounded-lg bg-zinc-950/50 border border-cyan-500/20">
+                  <h4 className="text-cyan-400 flex items-center gap-2 font-semibold">
+                    <CreditCard className="w-4 h-4" />Informasi Pembayaran
+                  </h4>
+                  <div className="text-sm text-zinc-300 leading-relaxed">
+                    <p>
+                      No. Rekening: <span className="text-white font-medium">5105390707</span>
+                    </p>
+                    <p>
+                      Bank: <span className="text-white font-medium">BCA</span>
+                    </p>
+                    <p>
+                      A/N: <span className="text-white font-medium">Bierley</span>
+                    </p>
+                  </div>
+                  <div className="pt-2 text-sm text-zinc-300">
+                    <p className="text-cyan-400 font-medium mb-1">
+                      Biaya Pendaftaran:
+                    </p>
+
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>
+                        <span className="text-white font-medium">Early Bird</span>
+                        <ul className="ml-5 list-disc text-zinc-400">
+                          <li>Rp 150.000 / tim</li>
+                          <li>Rp 435.000 / 3 tim</li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <span className="text-white font-medium">Normal</span>
+                        <ul className="ml-5 list-disc text-zinc-400">
+                          <li>Rp 170.000 / tim</li>
+                          <li>Rp 495.000 / 3 tim</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <Label className="text-cyan-400">
+                      Upload Bukti Pembayaran
+                    </Label>
+                    <Input
+                      type="file"
+                      className={fileInputClass + " mt-2"}
+                      required
+                    />
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* STEP 2: DATA ANGGOTA (LOOP 3) */}
-            {step === 2 && (
-              <div className="space-y-8 animate-in slide-in-from-right duration-500">
-                {members.map((member, index) => (
-                  <div key={index} className="p-4 rounded-xl border border-white/5 bg-zinc-950/30">
-                    <h3 className="text-lg font-bold text-cyan-500 mb-4 flex items-center gap-2">
-                      <Users className="w-5 h-5"/> Anggota {index + 1}
+            {/* STEP 2 */}
+            {step === 2 &&
+              members.map((m, i) => (
+                <div
+                  key={i}
+                  className="p-6 bg-zinc-950/40 border border-zinc-800 rounded-xl space-y-8"
+                >
+                  {/* HEADER */}
+                  <div className="flex items-center gap-2 border-b border-zinc-800 pb-3">
+                    <Users className="w-5 h-5 text-cyan-400" />
+                    <h3 className="text-cyan-400 font-semibold">
+                      Anggota {i + 1}
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Nama Lengkap</Label>
-                        <Input placeholder="Nama Anggota" onChange={(e) => handleMemberChange(index, "nama", e.target.value)} className="bg-zinc-900" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Pola Makan</Label>
-                        <Select onValueChange={(val) => handleMemberChange(index, "polaMakan", val)}>
-                          <SelectTrigger className="bg-zinc-900 border-white/10">
-                            <SelectValue placeholder="Pilih pola makan" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-zinc-900 text-white border-white/10">
-                            <SelectItem value="normal">Normal</SelectItem>
-                            <SelectItem value="vegetarian">Vegetarian</SelectItem>
-                            <SelectItem value="vegan">Vegan</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Alergi</Label>
-                        <Input placeholder="Jika tidak ada isi '-'" onChange={(e) => handleMemberChange(index, "alergi", e.target.value)} className="bg-zinc-900" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Penyakit Bawaan</Label>
-                        <Input placeholder="Jika tidak ada isi '-'" onChange={(e) => handleMemberChange(index, "penyakit", e.target.value)} className="bg-zinc-900" />
-                      </div>
-                    </div>
                   </div>
-                ))}
-              </div>
-            )}
 
-            {/* STEP 3: UPLOAD BERKAS ANGGOTA */}
-            {step === 3 && (
-              <div className="space-y-6 animate-in slide-in-from-right duration-500">
-                {members.map((member, index) => (
-                  <div key={index} className="p-4 border-l-4 border-cyan-500 bg-zinc-950/30">
-                     <p className="font-bold text-sm mb-3 uppercase tracking-wider">Berkas Anggota {index + 1}: {member.nama || "..."}</p>
-                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                        <div className="space-y-1">
-                          <Label className="text-[10px]">Pas Foto 3x4</Label>
-                          <Input type="file" className="text-[10px] h-8 bg-zinc-900" />
-                        </div>
-                        <div className="space-y-1">
-                          <Label className="text-[10px]">Kartu Pelajar</Label>
-                          <Input type="file" className="text-[10px] h-8 bg-zinc-900" />
-                        </div>
-                        <div className="space-y-1">
-                          <Label className="text-[10px]">Bukti Follow @ceg.ubaya</Label>
-                          <Input type="file" className="text-[10px] h-8 bg-zinc-900" />
-                        </div>
-                        <div className="space-y-1">
-                          <Label className="text-[10px]">Bukti Follow @officialtkubaya</Label>
-                          <Input type="file" className="text-[10px] h-8 bg-zinc-900" />
-                        </div>
-                     </div>
-                  </div>
-                ))}
-                
-                {/* INFO BIAYA & CP */}
-                <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-xs">
-                        <h5 className="font-bold text-blue-400 mb-1">Rincian Biaya:</h5>
-                        <p>Early Bird: Rp 150k/tim | Rp 435k/3 tim</p>
-                        <p>Normal: Rp 170k/tim | Rp 495k/3 tim</p>
+                  {/* ================= DATA PRIBADI ================= */}
+                  <section className="space-y-4">
+                    <h4 className="text-cyan-400 font-medium">
+                      Data Pribadi
+                    </h4>
+
+                    <div>
+                      <Label className="text-cyan-400">Nama Lengkap</Label>
+                      <Input
+                        placeholder="Masukkan nama lengkap"
+                        value={m.nama}
+                        onChange={(e) =>
+                          handleMemberChange(i, "nama", e.target.value)
+                        }
+                        className={inputClass}
+                      />
                     </div>
-                    <div className="p-4 rounded-lg bg-purple-500/10 border border-purple-500/20 text-xs text-zinc-400">
-                        <h5 className="font-bold text-purple-400 mb-1">Contact Person:</h5>
-                        <p>Safira (WA: 088803163354)</p>
-                        <p>Ko Justin (Line: justin_loka)</p>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-cyan-400">
+                          Alergi
+                          <span className="text-xs text-zinc-400 ml-2">
+                            (isi “-” jika tidak ada)
+                          </span>
+                        </Label>
+                        <Input
+                          placeholder="Contoh: Udang"
+                          value={m.alergi}
+                          onChange={(e) =>
+                            handleMemberChange(i, "alergi", e.target.value)
+                          }
+                          className={inputClass}
+                        />
+                      </div>
+
+                      <div>
+                        <Label className="text-cyan-400">
+                          Penyakit
+                          <span className="text-xs text-zinc-400 ml-2">
+                            (isi “-” jika tidak ada)
+                          </span>
+                        </Label>
+                        <Input
+                          placeholder="Contoh: Asma"
+                          value={m.penyakit}
+                          onChange={(e) =>
+                            handleMemberChange(i, "penyakit", e.target.value)
+                          }
+                          className={inputClass}
+                        />
+                      </div>
                     </div>
+                  </section>
+
+                  {/* ================= DOKUMEN ================= */}
+                  <section className="space-y-4 pt-4 border-t border-zinc-800">
+                    <h4 className="text-cyan-400 font-medium">
+                      Dokumen Wajib
+                    </h4>
+
+                    <div>
+                      <Label className="text-cyan-400">Pas Foto 3×4</Label>
+                      <Input type="file" className={fileInputClass} />
+                    </div>
+
+                    <div>
+                      <Label className="text-cyan-400">Kartu Pelajar</Label>
+                      <Input type="file" className={fileInputClass} />
+                    </div>
+
+                    <div>
+                      <Label className="text-cyan-400">
+                        Bukti Follow Instagram @ceg.ubaya
+                      </Label>
+                      <Input type="file" className={fileInputClass} />
+                    </div>
+
+                    <div>
+                      <Label className="text-cyan-400">
+                        Bukti Follow Instagram @officialtkubaya
+                      </Label>
+                      <Input type="file" className={fileInputClass} />
+                    </div>
+                  </section>
+
+                  {/* ================= KONSUMSI ================= */}
+                  <section className="space-y-4 pt-4 border-t border-zinc-800">
+                    <h4 className="text-cyan-400 font-medium">
+                      Konsumsi
+                    </h4>
+
+                    <div>
+                      <Label className="text-cyan-400">Pola Makan</Label>
+                      <Select
+                        value={m.polaMakan}
+                        onValueChange={(v) =>
+                          handleMemberChange(i, "polaMakan", v)
+                        }
+                      >
+                        <SelectTrigger className={inputClass}>
+                          <SelectValue placeholder="Pilih pola makan" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-zinc-900 text-white">
+                          <SelectItem value="normal">Normal</SelectItem>
+                          <SelectItem value="vegetarian">Vegetarian</SelectItem>
+                          <SelectItem value="vegan">Vegan</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </section>
                 </div>
+              ))}
+
+              {/* STEP 3 */}
+              {step === 3 && (
+                <div className="space-y-6">
+
+                  <h3 className="text-cyan-400 font-semibold text-lg">
+                    Contact Person
+                  </h3>
+
+                  {/* CP 1 */}
+                  <div className="p-5 rounded-xl bg-zinc-950/40 border border-zinc-800 space-y-2">
+                    <p className="text-white font-semibold">Safira</p>
+                    <p className="text-sm text-zinc-400">
+                      LINE: <span className="text-cyan-400">01safsafira</span>
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      WhatsApp: <span className="text-cyan-400">088803163354</span>
+                    </p>
+                  </div>
+
+                  {/* CP 2 */}
+                  <div className="p-5 rounded-xl bg-zinc-950/40 border border-zinc-800 space-y-2">
+                    <p className="text-white font-semibold">Justin</p>
+                    <p className="text-sm text-zinc-400">
+                      ID LINE: <span className="text-cyan-400">justin_loka</span>
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      WhatsApp: <span className="text-cyan-400">087856913888</span>
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
+                    <p className="text-sm text-cyan-300">
+                      📌 Silakan hubungi Contact Person di atas jika mengalami kendala
+                      saat pendaftaran atau membutuhkan informasi lebih lanjut.
+                    </p>
+                  </div>
+
+                </div>
+              )}
+
+              <CardFooter className="flex items-center justify-between gap-4">
+              {/* KIRI: Kembali / Login */}
+              <div>
+                {step > 1 ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setStep((prev) => prev - 1)}
+                    className="flex items-center gap-2"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    Kembali
+                  </Button>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="text-sm text-zinc-400 hover:text-cyan-400 flex items-center gap-1"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    Login
+                  </Link>
+                )}
               </div>
-            )}
 
+              {/* KANAN: Lanjut / Submit */}
+              <div>
+                {step < 4 ? (
+                  <Button
+                    type="button"
+                    onClick={() => setStep((prev) => prev + 1)}
+                    className="flex items-center gap-2"
+                  >
+                    Lanjut
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="flex items-center gap-2"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Memproses...
+                      </>
+                    ) : (
+                      "Daftar"
+                    )}
+                  </Button>
+                )}
+              </div>
+            </CardFooter>
           </CardContent>
-
-          <CardFooter className="flex justify-between border-t border-white/5 pt-6 mt-4">
-            {step > 1 ? (
-              <Button type="button" variant="outline" onClick={() => setStep(step - 1)} className="border-white/10 text-white hover:bg-white/5">
-                <ArrowLeft className="w-4 h-4 mr-2"/> Kembali
-              </Button>
-            ) : (
-              <Link href="/login" className="text-sm text-zinc-500 hover:text-white flex items-center">
-                <ArrowLeft className="w-4 h-4 mr-2"/> Ke Login
-              </Link>
-            )}
-
-            {step < 3 ? (
-              <Button type="button" onClick={() => setStep(step + 1)} className="bg-cyan-600 hover:bg-cyan-500 text-white">
-                Lanjut <ArrowRight className="w-4 h-4 ml-2"/>
-              </Button>
-            ) : (
-              <Button type="submit" disabled={loading} className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white min-w-[120px]">
-                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Daftar Sekarang"}
-              </Button>
-            )}
-          </CardFooter>
         </form>
+
+        {success && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="w-full max-w-md rounded-2xl bg-zinc-900 border border-cyan-500/30 p-6 text-center space-y-4">
+              
+              <h2 className="text-2xl font-bold text-cyan-400">
+                🎉 Pendaftaran Berhasil
+              </h2>
+
+              <p className="text-zinc-300 text-sm">
+                Terima kasih telah mendaftar.  
+                Tim kami akan menghubungi melalui Contact Person yang tersedia.
+              </p>
+
+              <Button
+                className="w-full"
+                onClick={() => router.push("/login")}
+              >
+                OK
+              </Button>
+            </div>
+          </div>
+        )}
       </Card>
-      
-      <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
-      `}</style>
     </div>
-  )
+  );
 }
