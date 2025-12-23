@@ -10,7 +10,7 @@ export const metadata = {
 export default function TeamDetailPage() {
   return (
     <RoleGuard allowedRoles={["ADMIN"]}>
-      <TeamDetailView teamId={params.teamId} />
+      <TeamDetailView />
     </RoleGuard>
   );
 }
