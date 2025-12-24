@@ -1,4 +1,3 @@
-// app/(peserta)/rally/structure-of-atom/page.js
 import React from "react";
 import ViewGame from "@/views/peserta/structure-of-atomic/ViewGame";
 
