@@ -2,6 +2,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {
+  Lock,
+  Users,
+  CreditCard,
+  ArrowLeft,
+  ArrowRight,
+  Eye,
+  EyeOff,
+  Loader2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,13 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Users,
-  CreditCard,
-  ArrowLeft,
-  ArrowRight,
-  Loader2,
-} from "lucide-react";
 
 /* =====================
    STYLE INPUT (GLOBAL)
