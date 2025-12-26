@@ -19,11 +19,6 @@ export default function HomepagePeserta() {
                 />
             </div>
 
-            {/* 2. Navbar tetap di atas dengan background putih transparan */}
-            <div className="w-full sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-white/20">
-                <Navbar />
-            </div>
-
             <div className="flex flex-col items-center justify-center flex-grow text-center px-4 pt-10">
                 {/* 3. Judul menggunakan Asset Gambar (CEG HOMEPAGE.png) */}
                 <div className="relative w-full max-w-4xl h-[200px] md:h-[350px] mb-4 animate-in fade-in zoom-in duration-700">
