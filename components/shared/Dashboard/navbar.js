@@ -17,6 +17,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+//GAMBAR
+import Image from "next/image";
+
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
@@ -46,174 +49,119 @@ export default function Navbar() {
     router.push('/');
   };
 
+  const isLoginPage = pathname === "/login";
+  const isRegisterPage = pathname === "/register";
+  const isAuthPage = isLoginPage || isRegisterPage;
+
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-zinc-950/80 backdrop-blur-xl supports-[backdrop-filter]:bg-zinc-950/60">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="relative">
-              <span className="relative text-2xl font-bold tracking-tight text-white">
-                CEG
-              </span>
-            </div>
+    // NAVBAR BACKGROUND: Transparan dengan backdrop blur sesuai gambar
+    <nav className="sticky top-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex h-20 items-center justify-between">
+          
+          {/* LOGO SECTION */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <Image 
+              src="/Asset/CEG HOMEPAGE.png" 
+              alt="CEG Logo" 
+              width={45} 
+              height={45} 
+              className="transition-transform group-hover:scale-110"
+            />
+            <span className="text-2xl font-black tracking-tighter text-teal-900">
+              CEG 2026
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden items-center space-x-8 md:flex">
+          {/* DESKTOP NAVIGATION */}
+          <div className="hidden items-center space-x-10 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative text-sm font-medium transition-colors hover:text-cyan-400 ${isActive(link.href) ? "text-cyan-400" : "text-zinc-400"
-                  }`}
+                className={`text-sm font-bold uppercase tracking-wider transition-all hover:text-teal-600 ${
+                  isActive(link.href) ? "text-teal-800" : "text-teal-900/70"
+                }`}
               >
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="absolute -bottom-[21px] left-0 h-0.5 w-full bg-gradient-to-r from-cyan-500 to-blue-500"></span>
+                  <div className="h-1 w-full bg-teal-800 rounded-full mt-0.5 animate-in slide-in-from-left-2" />
                 )}
               </Link>
             ))}
           </div>
 
-          {/* Action Buttons - Desktop */}
-          <div className="hidden items-center space-x-3 md:flex">
+          {/* ACTION BUTTONS */}
+          <div className="hidden items-center space-x-4 md:flex">
             {!isMounted ? (
-              <div className="h-10 w-32 animate-pulse bg-zinc-800/50 rounded" />
-            ) : token ? (
-              <>
-                <Button
-                  asChild
-                  className="w-auto text-zinc-300 hover:bg-white/10 hover:text-white"
-                >
-                  <Link href="/rally">
-                    Rally
-                  </Link>
-                </Button>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-zinc-300 hover:bg-white/10 hover:text-white">
-                      {user || "Profile"}
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>{user}</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Nama peserta1</DropdownMenuItem>
-                    <DropdownMenuItem>Nama Peserta2</DropdownMenuItem>
-                    <DropdownMenuItem>Nama Peserta3</DropdownMenuItem>
-                    <DropdownMenuItem>Status</DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </>
-            ) : (
-              <>
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="text-zinc-300 hover:bg-white/10 hover:text-white"
-                >
-                  <Link href="/register">Daftar</Link>
-                </Button>
-                <Button
-                  asChild
-                  className="border-cyan-500/50 bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/20 transition-all hover:shadow-cyan-500/40"
-                >
-                  <Link href="/login">Login</Link>
-                </Button>
-              </>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 md:hidden">
-            {!isMounted ? (
-              <div className="h-7 w-10 animate-pulse bg-zinc-800/50 rounded" />
+              <div className="h-10 w-24 animate-pulse bg-teal-800/10 rounded-full" />
             ) : token ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-zinc-300 hover:bg-white/10 hover:text-white">
-                    {user || "Profile"}
+                  <Button variant="ghost" className="rounded-full bg-teal-800/10 text-teal-900 hover:bg-teal-800/20 font-bold">
+                    <UserIcon className="mr-2 h-4 w-4" />
+                    {user || "User"}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>{user}</DropdownMenuLabel>
+                <DropdownMenuContent className="w-56 bg-white/90 backdrop-blur-lg border-teal-100">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Nama peserta1</DropdownMenuItem>
-                  <DropdownMenuItem>Nama Peserta2</DropdownMenuItem>
-                  <DropdownMenuItem>Nama Peserta3</DropdownMenuItem>
-                  <DropdownMenuItem>Status</DropdownMenuItem>
-                  <DropdownMenuItem
+                  <DropdownMenuItem className="focus:bg-teal-50">Profile Peserta</DropdownMenuItem>
+                  <DropdownMenuItem className="focus:bg-teal-50">Status Kelompok</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
                     onClick={handleLogout}
+                    className="text-red-600 focus:bg-red-50 font-bold"
                   >
-                    Logout
+                    <LogOut className="mr-2 h-4 w-4" /> Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : null}
-            <div className="flex items-center gap-4">
-              {!token && (
-                <div className="flex items-center gap-2">
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="text-zinc-300 hover:bg-white/10 hover:text-white"
-                  >
-                    <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
-                      Daftar
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    className="border-cyan-500/50 bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/20"
-                  >
-                    <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                      Login
-                    </Link>
-                  </Button>
-                </div>
-              )}
-              <Button
-                className="md:hidden text-zinc-400 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            ) : (
+              <Link
+                href="/login"
+                className="bg-teal-800 text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-teal-700 transition-all shadow-md hover:shadow-teal-900/20 active:scale-95"
               >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </Button>
-            </div>
+                Login
+              </Link>
+            )}
+          </div>
+
+          {/* MOBILE TOGGLE */}
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              className="text-teal-900"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       {mobileMenuOpen && (
-        <div className="border-t border-white/10 bg-zinc-950/95 backdrop-blur-xl md:hidden">
-          <div className="space-y-1 px-4 pb-3 pt-2">
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-teal-100">
+          <div className="space-y-2 px-6 py-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${isActive(link.href)
-                  ? "bg-cyan-500/10 text-cyan-400"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-white"
-                  }`}
+                className={`block py-3 text-lg font-bold ${
+                  isActive(link.href) ? "text-teal-800" : "text-teal-900/60"
+                }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            {token && (
-              <Link
-                className="block rounded-lg px-3 py-2 text-base font-medium transition-colors text-zinc-400 hover:bg-white/5 hover:text-white"
-                href="/rally"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Rally
-              </Link>
+            <hr className="border-teal-100 my-4" />
+            {!token && (
+              <Button asChild className="w-full bg-teal-800 rounded-xl py-6 text-lg">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+              </Button>
             )}
           </div>
         </div>

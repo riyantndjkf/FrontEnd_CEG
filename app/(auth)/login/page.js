@@ -25,12 +25,25 @@ import { setUser } from "@/core/feature/user/userSlice";
 import { setRole } from "@/core/feature/role/roleSlice";
 import useSWR from "swr";
 
+//GAMBAR
+import Image from 'next/image';
+
+//NAVBAR
+import Navbar from "@/components/shared/Dashboard/navbar";
+
+
 const loginSchema = Yup.object({
   nama: Yup.string().required("Nama harus diisi"),
   password: Yup.string().required("Password harus diisi"),
 });
 
+//GAMBAR
+const backgroundPath = "/Asset/Background Landscape.png";
+const welcomePath = "/Asset/LOGIN.png";
+const logoPath = "/Asset/CEG HOMEPAGE.png";
+
 export default function LoginPage() {
+
   const router = useRouter();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
@@ -81,155 +94,108 @@ export default function LoginPage() {
   const { handleSubmit, values, touched, errors } = formik;
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-950 to-zinc-900"></div>
-      <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 blur-3xl"></div>
-      <div className="absolute left-1/3 top-1/3 h-[300px] w-[300px] rounded-full bg-cyan-500/10 blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/3 h-[400px] w-[400px] rounded-full bg-blue-500/10 blur-3xl"></div>
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-30"></div>
+    <div className="relative min-h-screen w-full font-sans overflow-hidden">
+      {/* 1. Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image 
+          src={backgroundPath} 
+          alt="Background" 
+          fill 
+          className="object-cover"
+          priority
+        />
+      </div>
 
-      {/* Login Card */}
-      <Card className="relative z-10 w-full max-w-md border-white/10 bg-zinc-900/40 shadow-2xl shadow-cyan-500/5 backdrop-blur-xl">
-        <CardHeader className="space-y-3 text-center">
-          <CardTitle className="text-3xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
-              Selamat Datang
-            </span>
-          </CardTitle>
+      {/* 2. Navbar */}
+      <Navbar />
 
-          <CardDescription className="text-base text-zinc-400">
-            Masuk ke akun kamu untuk melanjutkan
-          </CardDescription>
-        </CardHeader>
+      {/* 3. Main Content */}
+      <main className="relative z-10 flex flex-col items-center justify-center pt-10 px-4">
+        {/* Tulisan Welcome (LOGIN.png) */}
+        <div className="mb-8">
+          <Image 
+            src={welcomePath} 
+            alt="Welcome" 
+            width={400} 
+            height={150} 
+            className="drop-shadow-lg"
+          />
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-5">
-            {/* Nama Field */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="nama"
-                className="text-sm font-medium text-zinc-300"
-              >
-                Nama
-              </Label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500" />
-                <Input
-                  id="nama"
-                  name="nama"
-                  type="text"
-                  placeholder="Masukkan nama kamu"
-                  value={values.nama}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  disabled={formik.isSubmitting}
-                  className="border-white/10 bg-zinc-950/50 pl-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
-                />
-                {touched.nama && errors.nama && (
-                  <p className="text-sm text-red-400 mt-1">{errors.nama}</p>
-                )}
-              </div>
+        {/* Form Container (Transparan sesuai gambar) */}
+        <div className="w-full max-w-4xl space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* USERNAME */}
+            <div className="group">
+              <label className="block text-teal-900 font-bold text-lg ml-2 mb-1">
+                Username
+              </label>
+              <input
+                type="text"
+                name="nama"
+                value={values.nama}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                placeholder="Masukkan username"
+                className="w-full bg-white/40 border-none rounded-2xl py-4 px-6 
+                          text-teal-900 placeholder:text-teal-800/60 
+                          focus:ring-2 focus:ring-teal-500 
+                          backdrop-blur-sm transition-all shadow-inner"
+              />
+              {touched.nama && errors.nama && (
+                <p className="text-red-500 text-sm mt-1 ml-2">{errors.nama}</p>
+              )}
             </div>
 
-            {/* Password Field */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="password"
-                className="text-sm font-medium text-zinc-300"
-              >
+            {/* PASSWORD */}
+            <div className="group">
+              <label className="block text-teal-900 font-bold text-lg ml-2 mb-1">
                 Password
-              </Label>
-              <div className="relative mb-5">
-                <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500" />
-                <Input
-                  id="password"
-                  name="password"
+              </label>
+              <div className="relative">
+                <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
+                  name="password"
                   value={values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  disabled={formik.isSubmitting}
-                  className="border-white/10 bg-zinc-950/50 pl-10 pr-10 text-white placeholder:text-zinc-500 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 disabled:opacity-50"
+                  placeholder="Masukkan password"
+                  className="w-full bg-white/40 border-none rounded-2xl py-4 px-6 pr-12
+                            text-teal-900 placeholder:text-teal-800/60 
+                            focus:ring-2 focus:ring-teal-500 
+                            backdrop-blur-sm transition-all shadow-inner"
                 />
-                {touched.password && errors.password && (
-                  <p className="text-sm text-red-400 mt-1">{errors.password}</p>
-                )}
 
-                {/* Tombol Toggle Mata */}
+                {/* Toggle Eye */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  disabled={formik.isSubmitting}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors focus:outline-none disabled:opacity-50"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-teal-800"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
+                  {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
                 </button>
               </div>
-            </div>
-          </CardContent>
 
-          <CardFooter className="flex flex-col space-y-4">
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={formik.isSubmitting}
-              className="group relative w-full overflow-hidden border-cyan-500/50 bg-gradient-to-r from-cyan-500 to-blue-500 py-6 text-base font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {formik.isSubmitting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Memproses...
-                  </>
-                ) : (
-                  "Masuk"
-                )}
-              </span>
-              {!formik.isSubmitting && (
-                <div className="absolute inset-0 -z-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100"></div>
+              {touched.password && errors.password && (
+                <p className="text-red-500 text-sm mt-1 ml-2">{errors.password}</p>
               )}
-            </Button>
-
-            {/* Divider */}
-            <div className="relative w-full">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10"></div>
-              </div>
-              <div className="relative flex justify-center text-xs">
-                <span className="bg-zinc-900/40 px-2 text-zinc-500">atau</span>
-              </div>
             </div>
 
-            {/* Back to Home Link */}
-            <Link
-              href="/"
-              className={`group flex w-full items-center justify-center space-x-2 text-sm text-zinc-400 transition-colors hover:text-cyan-400 ${formik.isSubmitting ? "pointer-events-none opacity-50" : ""
-                }`}
-            >
-              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-              <span>Kembali ke Beranda</span>
-            </Link>
 
-            {/* Register Link */}
-            <p className="text-center text-sm text-zinc-500">
-              Belum punya akun?{" "}
-              <Link
-                href="/register"
-                className={`font-semibold text-cyan-400 transition-colors hover:text-cyan-300 ${formik.isSubmitting ? "pointer-events-none opacity-50" : ""
-                  }`}
+            {/* Submit Button */}
+            <div className="flex justify-center pt-6">
+              <button 
+                type="submit"
+                className="bg-teal-700/80 hover:bg-teal-800 text-white px-12 py-3 rounded-2xl font-bold text-xl shadow-lg backdrop-blur-md transition-all transform hover:scale-105"
               >
-                Daftar sekarang
-              </Link>
-            </p>
-          </CardFooter>
-        </form>
-      </Card>
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+                Login
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </main>
     </div>
   );
 }
