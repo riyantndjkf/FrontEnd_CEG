@@ -24,6 +24,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+//NAVBAR
+import Navbar from "@/components/shared/Dashboard/navbar";
+
 // Update styling input agar transparan sesuai gambar
 const inputClass =
   "bg-white/40 border-none rounded-xl py-6 px-4 text-teal-900 placeholder:text-teal-800/50 " +
@@ -85,6 +88,8 @@ export default function Register() {
           priority
         />
       </div>
+
+      <Navbar />
 
       {/* 2. Content Container (Scrollable Page) */}
       <div className="relative flex flex-col items-center justify-center px-4 py-20">
