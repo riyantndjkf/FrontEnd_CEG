@@ -119,6 +119,12 @@ export default function Register() {
     }, 1500);
   };
 
+  const fileInputClass =
+  "bg-white/40 border-2 border-dashed border-teal-800/20 text-teal-900 text-sm " +
+  "file:mr-4 file:h-full file:px-4 md:file:px-10 file:rounded-l-xl file:border-0 " + // md:px-10 untuk komputer, px-4 untuk HP
+  "file:text-sm file:font-bold file:bg-teal-800 file:text-white " +
+  "file:hover:bg-teal-900 cursor-pointer h-[64px] flex items-center rounded-xl transition-all overflow-hidden p-0";
+
   return (
     <div className="relative min-h-screen w-full font-sans">
       <div className="fixed inset-0 -z-10">
@@ -198,43 +204,89 @@ export default function Register() {
             )}
 
             {step === 2 && (
-              <div className="space-y-10 animate-in fade-in duration-500">
+              <div className="space-y-12 animate-in fade-in duration-500">
                 {allTeamsData[currentTeamIndex].members.map((m, i) => (
-                  <div key={i} className="bg-white/30 p-8 rounded-3xl border border-white/40 space-y-6">
-                    <h3 className="text-teal-900 font-black text-xl border-b border-teal-800/10 pb-2 uppercase">Anggota {i + 1}</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="md:col-span-2 space-y-2">
-                        <Label className="text-teal-900 font-bold">Nama Lengkap</Label>
-                        <Input value={m.nama} onChange={(e) => handleMemberChange(i, "nama", e.target.value)} className={inputClass} required />
-                      </div>
+                  <div key={i} className="bg-white/30 p-8 rounded-[40px] border border-white/40 shadow-sm space-y-8 backdrop-blur-md">
+                    <div className="flex items-center gap-4 border-b border-teal-800/10 pb-4">
+                      <span className="bg-teal-800 text-white w-10 h-10 rounded-2xl flex items-center justify-center font-black">
+                        0{i + 1}
+                      </span>
+                      <h3 className="text-teal-900 font-black text-2xl uppercase tracking-tight">Data Anggota {i + 1}</h3>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                      {/* Baris 1: Nama & Pola Makan */}
                       <div className="space-y-2">
-                        <Label className="text-teal-900 font-bold">Pola Makan</Label>
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Nama Lengkap</Label>
+                        <Input 
+                          value={m.nama} 
+                          placeholder="Sesuai Kartu Pelajar"
+                          onChange={(e) => handleMemberChange(i, "nama", e.target.value)} 
+                          className={inputClass} 
+                          required 
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Pola Makan</Label>
                         <Select onValueChange={(v) => handleMemberChange(i, "polaMakan", v)} defaultValue={m.polaMakan}>
-                          <SelectTrigger className={inputClass}><SelectValue /></SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="normal">Normal</SelectItem>
-                            <SelectItem value="vegetarian">Vegetarian</SelectItem>
-                            <SelectItem value="vegan">Vegan</SelectItem>
+                          {/* Gunakan h-auto dan py-6 agar tingginya sama persis dengan inputClass. 
+                            W-full memastikan lebar box kanan kiri seimbang.
+                          */}
+                          <SelectTrigger className={`${inputClass} h-auto py-6 w-full border-none shadow-inner`}>
+                            <SelectValue placeholder="Pilih Pola Makan" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white/90 backdrop-blur-md border-teal-800/20 rounded-xl">
+                            <SelectItem value="normal" className="text-teal-900 focus:bg-teal-100">Normal</SelectItem>
+                            <SelectItem value="vegetarian" className="text-teal-900 focus:bg-teal-100">Vegetarian</SelectItem>
+                            <SelectItem value="vegan" className="text-teal-900 focus:bg-teal-100">Vegan</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
+                      {/* Baris 2: Alergi & Penyakit */}
                       <div className="space-y-2">
-                        <Label className="text-teal-900 font-bold">Alergi (Isi - jika tidak ada)</Label>
-                        <Input value={m.alergi} onChange={(e) => handleMemberChange(i, "alergi", e.target.value)} className={inputClass} required />
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Alergi</Label>
+                        <Input 
+                          value={m.alergi} 
+                          placeholder="Isi - jika tidak ada"
+                          onChange={(e) => handleMemberChange(i, "alergi", e.target.value)} 
+                          className={inputClass} 
+                          required 
+                        />
                       </div>
-                      <div className="space-y-2 md:col-span-2">
-                        <Label className="text-teal-900 font-bold ml-1">Riwayat Penyakit (Isi - jika tidak ada)</Label>
+
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Riwayat Penyakit</Label>
                         <Input 
                           value={m.penyakit} 
-                          placeholder="Contoh: Asma, Maag"
+                          placeholder="Isi - jika tidak ada"
                           onChange={(e) => handleMemberChange(i, "penyakit", e.target.value)} 
                           className={inputClass} 
                           required 
                         />
                       </div>
-                      <div className="space-y-2"><Label className="text-teal-900 font-bold">Pas Foto 3x4</Label><Input type="file" className={fileInputClass} required /></div>
-                      <div className="space-y-2"><Label className="text-teal-900 font-bold">Follow @ceg.ubaya</Label><Input type="file" className={fileInputClass} required /></div>
-                      <div className="space-y-2 md:col-span-2"><Label className="text-teal-900 font-bold">Follow @officialtkubaya</Label><Input type="file" className={fileInputClass} required /></div>
+
+                      {/* Baris 3: Upload Pas Foto & Kartu pelajar */}
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Pas Foto 3x4</Label>
+                        <Input type="file" className={fileInputClass} required />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Foto Kartu Pelajar</Label>
+                        <Input type="file" className={fileInputClass} required />
+                      </div>
+
+                      {/* Baris 4: Upload IG1 & IG 2  */}
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Follow @ceg.ubaya</Label>
+                        <Input type="file" className={fileInputClass} required />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1 uppercase text-xs tracking-widest">Follow @officialtkubaya</Label>
+                        <Input type="file" className={fileInputClass} required />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -242,22 +294,42 @@ export default function Register() {
             )}
 
             {step === 3 && (
-              <div className="p-8 rounded-3xl bg-teal-900 text-white space-y-6 shadow-2xl animate-in zoom-in duration-300">
-                <div className="flex items-center gap-4"><CreditCard size={40} className="text-yellow-400" /> <h2 className="text-2xl font-black uppercase">Pembayaran Final</h2></div>
-                <div className="grid md:grid-cols-2 gap-6 bg-white/10 p-6 rounded-2xl">
-                  <div>
-                    <p className="text-sm opacity-70 italic">Transfer Ke (BCA):</p>
-                    <p className="text-xl font-black">5105390707</p>
-                    <p className="font-bold">A/N BIERLEY</p>
+              <div className="p-6 md:p-8 rounded-[40px] bg-teal-900 text-white space-y-6 shadow-2xl animate-in zoom-in duration-300 border border-white/10">
+                <div className="flex items-center gap-4">
+                  <div className="bg-yellow-400 p-2 rounded-2xl">
+                    <CreditCard size={32} className="text-teal-900" /> 
                   </div>
-                  <div className="md:text-right">
-                    <p className="text-sm opacity-70 uppercase">Total Bayar ({isEarlyBird ? 'Early' : 'Normal'}):</p>
-                    <p className="text-4xl font-black text-yellow-400">{formattedHarga}</p>
+                  <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight">Pembayaran Final</h2>
+                </div>
+
+                {/* Section Detail Transfer */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/10 p-6 rounded-3xl backdrop-blur-sm border border-white/5">
+                  <div className="space-y-1">
+                    <p className="text-xs opacity-70 italic font-medium uppercase tracking-wider">Transfer Ke (BCA):</p>
+                    <p className="text-2xl font-black text-white">5105390707</p>
+                    <p className="font-bold text-yellow-400">A/N BIERLEY</p>
+                  </div>
+                  
+                  <div className="md:text-right flex flex-col md:justify-center border-t md:border-t-0 border-white/10 pt-4 md:pt-0">
+                    <p className="text-xs opacity-70 uppercase font-medium tracking-wider">Total Bayar ({isEarlyBird ? 'Early' : 'Normal'}):</p>
+                    {/* Di HP teks harga diperkecil sedikit agar tidak overflow */}
+                    <p className="text-3xl md:text-5xl font-black text-yellow-400 mt-1">{formattedHarga}</p>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <Label className="font-bold text-lg">Upload Bukti Transfer</Label>
-                  <Input type="file" className={fileInputClass} required />
+
+                {/* Section Upload */}
+                <div className="space-y-3 pt-2">
+                  <Label className="font-bold text-lg ml-1 block">Upload Bukti Transfer</Label>
+                  <div className="relative group">
+                    <Input 
+                      type="file" 
+                      className={`${fileInputClass} bg-white/10 text-white file:bg-yellow-400 file:text-teal-900`} 
+                      required 
+                    />
+                  </div>
+                  <p className="text-[10px] md:text-xs opacity-50 italic ml-1">
+                    *Pastikan file berformat .jpg, .png, atau .pdf (Maks 2MB)
+                  </p>
                 </div>
               </div>
             )}
