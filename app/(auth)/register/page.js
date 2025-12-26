@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Lock,
@@ -13,14 +14,6 @@ import {
   Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -31,16 +24,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-/* =====================
-   STYLE INPUT (GLOBAL)
-===================== */
+// Update styling input agar transparan sesuai gambar
 const inputClass =
-  "bg-zinc-900 border-white/10 text-white placeholder:text-zinc-500 " +
-  "focus-visible:ring-2 focus-visible:ring-cyan-500/40 focus-visible:border-cyan-500/40";
+  "bg-white/40 border-none rounded-xl py-6 px-4 text-teal-900 placeholder:text-teal-800/50 " +
+  "focus-visible:ring-2 focus-visible:ring-teal-500 backdrop-blur-sm shadow-inner transition-all";
 
 const fileInputClass =
-  "bg-zinc-900 border-dashed border-zinc-700 text-white " +
-  "file:text-white file:bg-transparent";
+  "bg-white/20 border-dashed border-teal-800/30 text-teal-900 " +
+  "file:text-white file:bg-teal-800 file:rounded-md file:border-none cursor-pointer";
 
 export default function Register() {
   const router = useRouter();
@@ -72,6 +63,7 @@ export default function Register() {
     copy[i][field] = val;
     setMembers(copy);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -80,429 +72,215 @@ export default function Register() {
       setSuccess(true);
     }, 1500);
   };
+
   return (
-    <div className="relative flex min-h-screen items-center justify-center px-4 py-12">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-950 to-zinc-900"></div>
+    <div className="relative min-h-screen w-full font-sans">
+      {/* 1. Background Image */}
+      <div className="fixed inset-0 -z-10">
+        <Image 
+          src="/Asset/Background Landscape.png" 
+          alt="Background" 
+          fill 
+          className="object-cover"
+          priority
+        />
+      </div>
 
-      <Card className="relative z-10 w-full max-w-4xl border-white/10 bg-zinc-900/40 backdrop-blur-xl">
-        <CardHeader>
-          <div className="flex justify-between items-center">
-            <CardTitle className="text-2xl font-bold text-white">
-              Pendaftaran Tim CEG
-            </CardTitle>
-            <span className="text-xs text-zinc-500">STEP {step} OF 3</span>
-          </div>
-          <CardDescription>Lengkapi data kelompok dan anggota</CardDescription>
-        </CardHeader>
+      {/* 2. Content Container (Scrollable Page) */}
+      <div className="relative flex flex-col items-center justify-center px-4 py-20">
+        
+        {/* Asset LOGIN.png (Tulisan Welcome) */}
+        <div className="mb-10 text-center">
+          <Image 
+            src="/Asset/LOGIN.png" 
+            alt="Welcome Register" 
+            width={350} 
+            height={120} 
+            className="drop-shadow-xl"
+          />
+          <p className="mt-4 text-teal-900 font-bold bg-white/30 backdrop-blur-sm px-4 py-1 rounded-full inline-block">
+            STEP {step} OF 3
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-6 max-h-[60vh] overflow-y-auto">
-            {/* STEP 1 */}
+        {/* 3. Form Card - Transparan, No internal scroll */}
+        <div className="w-full max-w-4xl bg-white/20 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl p-8 md:p-12">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            
+            {/* STEP 1: Info Kelompok */}
             {step === 1 && (
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <Label>Nama Kelompok</Label>
-                  <h4 className="text-cyan-400 flex items-center gap-2">
-                    Nama Tim
-                  </h4>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <Label className="text-teal-900 font-bold text-lg ml-1">Nama Kelompok</Label>
                   <Input
                     name="namaKelompok"
-                    placeholder="Nama Tim"
+                    placeholder="Masukkan nama tim"
                     onChange={handleGroupChange}
                     className={inputClass}
                     required
                   />
                 </div>
 
-                <div>
-                  <Label>Password</Label>
-                  <h4 className="text-cyan-400 flex items-center gap-2">
-                    Password
-                  </h4>
+                <div className="space-y-2">
+                  <Label className="text-teal-900 font-bold text-lg ml-1">Password</Label>
                   <div className="relative">
-                    {/* Icon Lock di Kiri */}
-                    <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500" />
-
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-teal-800" />
                     <Input
                       type={showPassword ? "text" : "password"}
                       name="password"
-                      placeholder="Masukkan password"
+                      placeholder="Buat password kelompok"
                       onChange={handleGroupChange}
-                      // Tambahkan pl-10 (padding-left) agar teks tidak menabrak icon Lock
-                      // Tambahkan pr-10 (padding-right) agar teks tidak menabrak icon Mata
-                      className={`${inputClass} pl-10 pr-10`}
+                      className={`${inputClass} pl-12 pr-12`}
                       required
                     />
-
-                    {/* Tombol Toggle Mata di Kanan */}
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-cyan-400 transition-colors focus:outline-none"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-teal-800 hover:text-teal-600"
                     >
-                      {showPassword ? (
-                        <EyeOff className="h-5 w-5" />
-                      ) : (
-                        <Eye className="h-5 w-5" />
-                      )}
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                   </div>
                 </div>
 
-                <div>
-                  <Label>Asal Sekolah</Label>
-                  <h4 className="text-cyan-400 flex items-center gap-2">
-                    Asal Sekolah
-                  </h4>
-                  <Input
-                    name="asalSekolah"
-                    placeholder="Asal Sekolah"
-                    onChange={handleGroupChange}
-                    className={inputClass}
-                    required
-                  />
+                <div className="space-y-2">
+                  <Label className="text-teal-900 font-bold text-lg ml-1">Asal Sekolah</Label>
+                  <Input name="asalSekolah" placeholder="SMA Negeri..." onChange={handleGroupChange} className={inputClass} required />
                 </div>
 
-                <div>
-                  <Label>Email</Label>
-                  <h4 className="text-cyan-400 flex items-center gap-2">
-                    Email
-                  </h4>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="email@gmail.com"
-                    onChange={handleGroupChange}
-                    className={inputClass}
-                    required
-                  />
+                <div className="space-y-2">
+                  <Label className="text-teal-900 font-bold text-lg ml-1">Email</Label>
+                  <Input type="email" name="email" placeholder="tim@gmail.com" onChange={handleGroupChange} className={inputClass} required />
                 </div>
 
-                <div>
-                  <Label>No Telp</Label>
-                  <h4 className="text-cyan-400 flex items-center gap-2">
-                    No Telp
-                  </h4>
-                  <Input
-                    name="noTelp"
-                    placeholder="No Telp"
-                    onChange={handleGroupChange}
-                    className={inputClass}
-                    required
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <Label>ID Line</Label>
-                  <h4 className="text-cyan-400 flex items-center gap-2">
-                    ID Line
-                  </h4>
-                  <Input
-                    name="idLine"
-                    placeholder="ID Line"
-                    onChange={handleGroupChange}
-                    className={inputClass}
-                    required
-                  />
-                </div>
-
-                <div className="md:col-span-2 p-4 rounded-lg bg-zinc-950/50 border border-cyan-500/20">
-                  <h4 className="text-cyan-400 flex items-center gap-2 font-semibold">
-                    <CreditCard className="w-4 h-4" />
-                    Informasi Pembayaran
-                  </h4>
-                  <div className="text-sm text-zinc-300 leading-relaxed">
-                    <p>
-                      No. Rekening:{" "}
-                      <span className="text-white font-medium">5105390707</span>
-                    </p>
-                    <p>
-                      Bank: <span className="text-white font-medium">BCA</span>
-                    </p>
-                    <p>
-                      A/N:{" "}
-                      <span className="text-white font-medium">Bierley</span>
-                    </p>
+                {/* Info Pembayaran Box */}
+                <div className="md:col-span-2 p-6 rounded-2xl bg-teal-900/80 text-white shadow-lg space-y-4">
+                  <div className="flex items-center gap-2 border-b border-white/20 pb-2">
+                    <CreditCard className="w-6 h-6" />
+                    <h4 className="font-bold text-xl">Informasi Pembayaran</h4>
                   </div>
-                  <div className="pt-2 text-sm text-zinc-300">
-                    <p className="text-cyan-400 font-medium mb-1">
-                      Biaya Pendaftaran:
-                    </p>
-
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>
-                        <span className="text-white font-medium">
-                          Early Bird
-                        </span>
-                        <ul className="ml-5 list-disc text-zinc-400">
-                          <li>Rp 150.000 / tim</li>
-                          <li>Rp 435.000 / 3 tim</li>
-                        </ul>
-                      </li>
-
-                      <li>
-                        <span className="text-white font-medium">Normal</span>
-                        <ul className="ml-5 list-disc text-zinc-400">
-                          <li>Rp 170.000 / tim</li>
-                          <li>Rp 495.000 / 3 tim</li>
-                        </ul>
-                      </li>
-                    </ul>
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="opacity-70">Transfer Ke:</p>
+                      <p className="text-lg font-bold tracking-widest">5105390707 (BCA)</p>
+                      <p className="font-medium uppercase">A/N Bierley</p>
+                    </div>
+                    <div>
+                      <p className="opacity-70">Biaya:</p>
+                      <p className="font-bold">Early: Rp 150.000 / Tim</p>
+                      <p className="font-bold">Normal: Rp 170.000 / Tim</p>
+                    </div>
                   </div>
-
-                  <div>
-                    <Label className="text-cyan-400">
-                      Upload Bukti Pembayaran
-                    </Label>
-                    <Input
-                      type="file"
-                      className={fileInputClass + " mt-2"}
-                      required
-                    />
+                  <div className="pt-2">
+                    <Label className="text-white font-bold mb-2 block">Upload Bukti Transfer</Label>
+                    <Input type="file" className={fileInputClass} required />
                   </div>
                 </div>
               </div>
             )}
 
-            {/* STEP 2 */}
-            {step === 2 &&
-              members.map((m, i) => (
-                <div
-                  key={i}
-                  className="p-6 bg-zinc-950/40 border border-zinc-800 rounded-xl space-y-8"
-                >
-                  {/* HEADER */}
-                  <div className="flex items-center gap-2 border-b border-zinc-800 pb-3">
-                    <Users className="w-5 h-5 text-cyan-400" />
-                    <h3 className="text-cyan-400 font-semibold">
-                      Anggota {i + 1}
-                    </h3>
+            {/* STEP 2: Anggota (Tanpa scroll internal) */}
+            {step === 2 && (
+              <div className="space-y-10">
+                {members.map((m, i) => (
+                  <div key={i} className="bg-white/30 p-8 rounded-2xl border border-white/40 shadow-sm space-y-6">
+                    <div className="flex items-center gap-3 border-b border-teal-800/20 pb-3">
+                      <div className="bg-teal-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">
+                        {i + 1}
+                      </div>
+                      <h3 className="text-teal-900 font-black text-xl">ANGGOTA {i + 1}</h3>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2 md:col-span-2">
+                        <Label className="text-teal-900 font-bold ml-1">Nama Lengkap</Label>
+                        <Input 
+                          placeholder="Sesuai kartu pelajar" 
+                          value={m.nama} 
+                          onChange={(e) => handleMemberChange(i, "nama", e.target.value)}
+                          className={inputClass}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1">Alergi ( - jika tidak ada)</Label>
+                        <Input value={m.alergi} onChange={(e) => handleMemberChange(i, "alergi", e.target.value)} className={inputClass} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-teal-900 font-bold ml-1">Pas Foto 3x4</Label>
+                        <Input type="file" className={fileInputClass} />
+                      </div>
+                    </div>
                   </div>
+                ))}
+              </div>
+            )}
 
-                  {/* ================= DATA PRIBADI ================= */}
-                  <section className="space-y-4">
-                    <h4 className="text-cyan-400 font-medium">Data Pribadi</h4>
-
-                    <div>
-                      <Label className="text-cyan-400">Nama Lengkap</Label>
-                      <Input
-                        placeholder="Masukkan nama lengkap"
-                        value={m.nama}
-                        onChange={(e) =>
-                          handleMemberChange(i, "nama", e.target.value)
-                        }
-                        className={inputClass}
-                      />
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <Label className="text-cyan-400">
-                          Alergi
-                          <span className="text-xs text-zinc-400 ml-2">
-                            (isi “-” jika tidak ada)
-                          </span>
-                        </Label>
-                        <Input
-                          placeholder="Contoh: Udang"
-                          value={m.alergi}
-                          onChange={(e) =>
-                            handleMemberChange(i, "alergi", e.target.value)
-                          }
-                          className={inputClass}
-                        />
-                      </div>
-
-                      <div>
-                        <Label className="text-cyan-400">
-                          Penyakit
-                          <span className="text-xs text-zinc-400 ml-2">
-                            (isi “-” jika tidak ada)
-                          </span>
-                        </Label>
-                        <Input
-                          placeholder="Contoh: Asma"
-                          value={m.penyakit}
-                          onChange={(e) =>
-                            handleMemberChange(i, "penyakit", e.target.value)
-                          }
-                          className={inputClass}
-                        />
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* ================= DOKUMEN ================= */}
-                  <section className="space-y-4 pt-4 border-t border-zinc-800">
-                    <h4 className="text-cyan-400 font-medium">Dokumen Wajib</h4>
-
-                    <div>
-                      <Label className="text-cyan-400">Pas Foto 3×4</Label>
-                      <Input type="file" className={fileInputClass} />
-                    </div>
-
-                    <div>
-                      <Label className="text-cyan-400">Kartu Pelajar</Label>
-                      <Input type="file" className={fileInputClass} />
-                    </div>
-
-                    <div>
-                      <Label className="text-cyan-400">
-                        Bukti Follow Instagram @ceg.ubaya
-                      </Label>
-                      <Input type="file" className={fileInputClass} />
-                    </div>
-
-                    <div>
-                      <Label className="text-cyan-400">
-                        Bukti Follow Instagram @officialtkubaya
-                      </Label>
-                      <Input type="file" className={fileInputClass} />
-                    </div>
-                  </section>
-
-                  {/* ================= KONSUMSI ================= */}
-                  <section className="space-y-4 pt-4 border-t border-zinc-800">
-                    <h4 className="text-cyan-400 font-medium">Konsumsi</h4>
-
-                    <div>
-                      <Label className="text-cyan-400">Pola Makan</Label>
-                      <Select
-                        value={m.polaMakan}
-                        onValueChange={(v) =>
-                          handleMemberChange(i, "polaMakan", v)
-                        }
-                      >
-                        <SelectTrigger className={inputClass}>
-                          <SelectValue placeholder="Pilih pola makan" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-zinc-900 text-white">
-                          <SelectItem value="normal">Normal</SelectItem>
-                          <SelectItem value="vegetarian">Vegetarian</SelectItem>
-                          <SelectItem value="vegan">Vegan</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </section>
-                </div>
-              ))}
-
-            {/* STEP 3 */}
+            {/* STEP 3: Contact Person */}
             {step === 3 && (
-              <div className="space-y-6">
-                <h3 className="text-cyan-400 font-semibold text-lg">
-                  Contact Person
-                </h3>
-
-                {/* CP 1 */}
-                <div className="p-5 rounded-xl bg-zinc-950/40 border border-zinc-800 space-y-2">
-                  <p className="text-white font-semibold">Safira</p>
-                  <p className="text-sm text-zinc-400">
-                    LINE: <span className="text-cyan-400">01safsafira</span>
-                  </p>
-                  <p className="text-sm text-zinc-400">
-                    WhatsApp:{" "}
-                    <span className="text-cyan-400">088803163354</span>
-                  </p>
-                </div>
-
-                {/* CP 2 */}
-                <div className="p-5 rounded-xl bg-zinc-950/40 border border-zinc-800 space-y-2">
-                  <p className="text-white font-semibold">Justin</p>
-                  <p className="text-sm text-zinc-400">
-                    ID LINE: <span className="text-cyan-400">justin_loka</span>
-                  </p>
-                  <p className="text-sm text-zinc-400">
-                    WhatsApp:{" "}
-                    <span className="text-cyan-400">087856913888</span>
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/30">
-                  <p className="text-sm text-cyan-300">
-                    📌 Silakan hubungi Contact Person di atas jika mengalami
-                    kendala saat pendaftaran atau membutuhkan informasi lebih
-                    lanjut.
-                  </p>
-                </div>
+              <div className="max-w-2xl mx-auto space-y-6">
+                 <div className="bg-teal-800 text-white p-6 rounded-2xl shadow-xl space-y-4">
+                    <h3 className="text-2xl font-black border-b border-white/20 pb-2">Hubungi Kami</h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold">Safira (LINE)</span>
+                        <span className="bg-white/20 px-3 py-1 rounded-md">01safsafira</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold">Justin (WA)</span>
+                        <span className="bg-white/20 px-3 py-1 rounded-md">087856913888</span>
+                      </div>
+                    </div>
+                 </div>
+                 <div className="text-center p-4 bg-white/40 rounded-xl italic text-teal-900 font-medium">
+                   "Pastikan data yang diisi sudah benar sebelum menekan tombol Daftar."
+                 </div>
               </div>
             )}
 
-            <CardFooter className="flex items-center justify-between gap-4">
-              {/* KIRI: Kembali / Login */}
-              <div>
-                {step > 1 ? (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setStep((prev) => prev - 1)}
-                    className="flex items-center gap-2"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    Kembali
-                  </Button>
+            {/* Navigasi Button */}
+            <div className="flex items-center justify-between pt-10 border-t border-teal-800/10">
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => step > 1 ? setStep(step - 1) : router.push("/login")}
+                className="text-teal-900 font-bold text-lg hover:bg-white/20"
+              >
+                <ArrowLeft className="mr-2 h-5 w-5" />
+                {step === 1 ? "Ke Login" : "Kembali"}
+              </Button>
+
+              <Button
+                type={step === 3 ? "submit" : "button"}
+                onClick={() => step < 3 && setStep(step + 1)}
+                disabled={loading}
+                className="bg-teal-800 hover:bg-teal-900 text-white px-10 py-6 rounded-2xl font-bold text-xl shadow-lg transition-transform active:scale-95"
+              >
+                {loading ? (
+                  <Loader2 className="animate-spin h-6 w-6" />
+                ) : step === 3 ? (
+                  "DAFTAR SEKARANG"
                 ) : (
-                  <Link
-                    href="/login"
-                    className="text-sm text-zinc-400 hover:text-cyan-400 flex items-center gap-1"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    Login
-                  </Link>
+                  <>Lanjut <ArrowRight className="ml-2 h-5 w-5" /></>
                 )}
-              </div>
-
-              {/* KANAN: Lanjut / Submit */}
-              <div>
-                {step < 4 ? (
-                  <Button
-                    type="button"
-                    onClick={() => setStep((prev) => prev + 1)}
-                    className="flex items-center gap-2"
-                  >
-                    Lanjut
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="flex items-center gap-2"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Memproses...
-                      </>
-                    ) : (
-                      "Daftar"
-                    )}
-                  </Button>
-                )}
-              </div>
-            </CardFooter>
-          </CardContent>
-        </form>
-
-        {success && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-            <div className="w-full max-w-md rounded-2xl bg-zinc-900 border border-cyan-500/30 p-6 text-center space-y-4">
-              <h2 className="text-2xl font-bold text-cyan-400">
-                🎉 Pendaftaran Berhasil
-              </h2>
-
-              <p className="text-zinc-300 text-sm">
-                Terima kasih telah mendaftar. Tim kami akan menghubungi melalui
-                Contact Person yang tersedia.
-              </p>
-
-              <Button className="w-full" onClick={() => router.push("/login")}>
-                OK
               </Button>
             </div>
+          </form>
+        </div>
+      </div>
+
+      {/* Success Modal */}
+      {success && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-teal-900/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center space-y-6 shadow-2xl">
+            <div className="text-6xl text-center">🎉</div>
+            <h2 className="text-2xl font-black text-teal-900 uppercase">Pendaftaran Berhasil!</h2>
+            <p className="text-teal-800 font-medium">Data kelompokmu sudah kami terima. Sampai jumpa di CEG 2026!</p>
+            <Button className="w-full bg-teal-800 py-6 rounded-xl font-bold text-lg" onClick={() => router.push("/login")}>
+              OKE!
+            </Button>
           </div>
-        )}
-      </Card>
+        </div>
+      )}
     </div>
   );
 }
