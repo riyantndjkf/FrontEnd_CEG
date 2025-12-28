@@ -94,17 +94,17 @@ export default function ListGame() {
 
     const handleJoinClick = async (post) => {
         try {
-            setLoadingPostId(post.id);
+            setLoadingPostId(post.penpos_id);
 
             const payload = {
-                current_pos: post.id,
+                current_pos: post.penpos_id,
             };
 
             const response = await API.rally.getUpdatedCurrentPost(payload);
 
             if (response?.data) {
                 toast.success("Berhasil bergabung ke pos permainan!");
-                router.push(`/rally/${post.id}/waiting-list`);
+                router.push(`/rally/${post.penpos_id}/waiting-list`);
             } else {
                 toast.error("Response tidak valid dari server");
             }
@@ -172,7 +172,7 @@ export default function ListGame() {
 
                             return (
                                 <Card
-                                    key={post.id}
+                                    key={post.penpos_id}
                                     className={`
                     group relative overflow-hidden transition-all duration-300
                     bg-zinc-900/40 backdrop-blur-md border border-zinc-800
@@ -218,10 +218,10 @@ export default function ListGame() {
                                             onClick={() => handleJoinClick(post)}
                                             className={`w-full group/btn ${hoverBg} relative z-20`}
                                             variant={interactive ? "default" : "secondary"}
-                                            disabled={!interactive || loadingPostId === post.id}
+                                            disabled={!interactive || loadingPostId === post.penpos_id}
                                         >
-                                            {loadingPostId === post.id ? "Joining..." : interactive ? "Join" : "Playing..."}
-                                            {interactive && loadingPostId !== post.id && (
+                                            {loadingPostId === post.penpos_id ? "Joining..." : interactive ? "Join" : "Playing..."}
+                                            {interactive && loadingPostId !== post.penpos_id && (
                                                 <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                                             )}
                                         </Button>

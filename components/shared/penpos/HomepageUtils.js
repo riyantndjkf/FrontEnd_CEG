@@ -4,9 +4,9 @@ export const BATTLE_MODE = "BATTLE";
 export const MAX_TEAMS_BATTLE = 2;
 
 export const extractPosData = (data) => {
-    if (!data?.data?.data?.pos) return null;
-    const { id, name_pos, tipe } = data.data.data.pos;
-    return { id, name: name_pos, type: tipe };
+    if (!data?.data?.data) return null;
+    const { penpos_id, name_pos, tipe } = data.data.data;
+    return { id: penpos_id, name: name_pos, type: tipe };
 };
 
 export const extractTeamsData = (data) => {

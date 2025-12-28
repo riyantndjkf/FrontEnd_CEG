@@ -75,8 +75,8 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`font-bold transition ${pathname === link.href
-                      ? "text-teal-800"
-                      : "text-teal-900/70 hover:text-teal-600"
+                    ? "text-teal-800"
+                    : "text-teal-900/70 hover:text-teal-600"
                     }`}
                 >
                   {link.label}
@@ -85,21 +85,29 @@ export default function Navbar() {
             </div>
           )}
 
+
           {/* ACTION BUTTON */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center">
             {!isMounted ? null : token ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost">{user}</Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>{user}</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout}>
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost">{user}</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>{user}</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout}>
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <Button variant="ghost" className="hidden md:flex font-bold text-teal-900"
+                  onClick={() => router.push('rally')}
+                >
+                  Rally
+                </Button>
+              </>
             ) : isLoginPage ? (
               <Link
                 href="/register"

@@ -29,6 +29,7 @@ export default function HomePagePenpos() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const userPenpos = useAppSelector((state) => state.user.userPenpos);
+    console.log("User Penpos from Redux:", userPenpos);
 
     const { data: responseGetPos } = useSWR(["getPos"], () => penpos.getPos());
     const { data: teamsResponse, error: teamsError, isLoading: isLoadingTeams } = useSWR(
@@ -100,6 +101,7 @@ export default function HomePagePenpos() {
 
     useEffect(() => {
         const posData = extractPosData(responseGetPos);
+        console.log("Extracted Pos Data:", responseGetPos);
         if (posData) {
             dispatch(setUserPenpos(posData.id));
             setPosInfo({
