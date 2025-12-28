@@ -50,7 +50,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
+    <nav className="absolute top-0 left-0 right-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
@@ -74,11 +74,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-bold transition ${
-                    pathname === link.href
+                  className={`font-bold transition ${pathname === link.href
                       ? "text-teal-800"
                       : "text-teal-900/70 hover:text-teal-600"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </Link>

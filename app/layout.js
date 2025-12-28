@@ -1,9 +1,9 @@
-// Perhatikan path import di bawah ini sudah disesuaikan
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import Providers from "@/core/store/Providers";
 import Loader from "@/components/shared/Loader";
 import GameStatusGuard from "@/components/shared/GameStatusGuard";
+import MaskotsplashScreen from "@/components/shared/MaskotsplashScreen";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="id">
       <body className="bg-zinc-950 text-white antialiased">
         <Providers>
+          <MaskotsplashScreen />
           <GameStatusGuard>
             <Suspense fallback={<Loader />}>
               {children}
