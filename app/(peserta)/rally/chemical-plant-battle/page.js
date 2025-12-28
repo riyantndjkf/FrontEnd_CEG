@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import ViewGame from "@/views/peserta/chemical-plant-battle/ViewGame";
 
-export default function ChemicalPlantBattle() {
-    return (
-        <div>ChemicalPlantBattle</div>
-    )
+export default function ChemicalPlantBattlePage() {
+  return <ViewGame />;
 }
