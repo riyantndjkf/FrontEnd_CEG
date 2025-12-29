@@ -1,0 +1,153 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/admin/team/[teamId]",
+      "regex": "^/admin/team/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPteamId": "nxtPteamId"
+      },
+      "namedRegex": "^/admin/team/(?<nxtPteamId>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/pos/[id]/result",
+      "regex": "^/pos/([^/]+?)/result(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/pos/(?<nxtPid>[^/]+?)/result(?:/)?$"
+    },
+    {
+      "page": "/rally/[id]/waiting-list",
+      "regex": "^/rally/([^/]+?)/waiting\\-list(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/rally/(?<nxtPid>[^/]+?)/waiting\\-list(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/pos",
+      "regex": "^/pos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pos(?:/)?$"
+    },
+    {
+      "page": "/rally",
+      "regex": "^/rally(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rally(?:/)?$"
+    },
+    {
+      "page": "/rally/answer-the-question",
+      "regex": "^/rally/answer\\-the\\-question(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rally/answer\\-the\\-question(?:/)?$"
+    },
+    {
+      "page": "/rally/battle-abn",
+      "regex": "^/rally/battle\\-abn(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rally/battle\\-abn(?:/)?$"
+    },
+    {
+      "page": "/rally/chemical-plant-battle",
+      "regex": "^/rally/chemical\\-plant\\-battle(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rally/chemical\\-plant\\-battle(?:/)?$"
+    },
+    {
+      "page": "/rally/sort-the-process",
+      "regex": "^/rally/sort\\-the\\-process(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rally/sort\\-the\\-process(?:/)?$"
+    },
+    {
+      "page": "/rally/structure-of-atomic",
+      "regex": "^/rally/structure\\-of\\-atomic(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rally/structure\\-of\\-atomic(?:/)?$"
+    },
+    {
+      "page": "/register",
+      "regex": "^/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/register(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
