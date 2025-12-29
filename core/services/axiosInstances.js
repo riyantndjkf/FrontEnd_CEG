@@ -3,8 +3,7 @@ import { setupInterceptorsTo } from "./interceptors";
 
 /**
  * Creates an axios instance for a specific service with enhanced interceptors
- * @param {string} service - The service endpoint
- * @param {Object} options - Additional interceptor options
+ * @param {string} options - Additional interceptor options
  * @param {Object} axiosConfig - Additional axios configuration
  * @returns {Object} Configured axios instance
  */
@@ -12,7 +11,9 @@ export const createAxiosInstance = (
     options = {},
     axiosConfig = {}
 ) => {
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
+    // Bagian ini mengambil URL dari file .env
+    // Jika .env tidak terbaca, ia akan default ke localhost:5000
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
     const instance = axios.create({
         baseURL: baseUrl,
