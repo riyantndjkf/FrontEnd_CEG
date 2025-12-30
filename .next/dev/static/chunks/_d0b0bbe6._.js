@@ -986,13 +986,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$intercep
 ;
 ;
 const createAxiosInstance = (options = {}, axiosConfig = {})=>{
-    // Bagian ini mengambil URL dari file .env
-    // Jika .env tidak terbaca, ia akan default ke localhost:5000
-    const baseUrl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const baseUrl = ("TURBOPACK compile-time value", "http://localhost:5000") || "http://localhost:5000";
     const instance = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].create({
-        baseURL: 'https://api.cegubaya.com/api',
+        baseURL: `${baseUrl}/api`,
         headers: {
-            "Content-Type": "application/json",
+            // HAPUS "Content-Type": "application/json", AGAR AXIOS OTOMATIS MENDETEKSI FORM DATA
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
             "Expires": "0"
@@ -1013,6 +1011,8 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "use strict";
 
 __turbopack_context__.s([
+    "admin",
+    ()=>admin,
     "auth",
     ()=>auth,
     "battleAbn",
@@ -1032,7 +1032,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$intercep
 const handleRequest = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$interceptors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createHandleRequest"])();
 const axiosInstance = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$axiosInstances$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createAxiosInstance"])();
 const auth = {
-    login: (data)=>handleRequest(axiosInstance.post("/auth/login", data))
+    login: (data)=>handleRequest(axiosInstance.post("/auth/login", data)),
+    // FUNGSI REGISTER BARU
+    register: (data)=>handleRequest(axiosInstance.post("/auth/register", data)),
+    registerAdmin: (data)=>handleRequest(axiosInstance.post("/auth/register-admin", data))
 };
 const penpos = {
     getPos: ()=>handleRequest(axiosInstance.get("/penpos/get-pos")),
@@ -1054,6 +1057,20 @@ const rally = {
 };
 const battleAbn = {
     getCard: (data)=>handleRequest(axiosInstance.post("/user/abn/get-card", data))
+};
+const admin = {
+    // Ambil semua tim
+    getAllTeams: ()=>handleRequest(axiosInstance.get("/admin/get-all-teams")),
+    // Ambil detail tim
+    getTeamDetail: (teamId)=>handleRequest(axiosInstance.get(`/admin/get-team-detail/${teamId}`)),
+    // === PERBAIKAN DI SINI: GUNAKAN FORMDATA ===
+    verifyTeam: (teamId, status)=>{
+        // 1. Buat FormData
+        const formData = new FormData();
+        formData.append("status", status);
+        // 2. Kirim FormData (Header akan otomatis diatur oleh Axios)
+        return handleRequest(axiosInstance.put(`/admin/verify-payment/${teamId}`, formData));
+    }
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);

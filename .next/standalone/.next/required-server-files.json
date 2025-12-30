@@ -62,11 +62,18 @@
           "search": ""
         }
       ],
-      "remotePatterns": [],
+      "remotePatterns": [
+        {
+          "protocol": "http",
+          "hostname": "localhost",
+          "port": "5000",
+          "pathname": "/public/**"
+        }
+      ],
       "qualities": [
         75
       ],
-      "unoptimized": false
+      "unoptimized": true
     },
     "devIndicators": {
       "position": "bottom-left"
@@ -100,7 +107,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\laragon\\www\\FrontEnd_CEG",
+    "outputFileTracingRoot": "C:\\Users\\felix\\FrontEnd_CEG",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -158,7 +165,7 @@
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 19,
+      "cpus": 11,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -290,11 +297,11 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
     "turbopack": {
-      "root": "C:\\laragon\\www\\FrontEnd_CEG"
+      "root": "C:\\Users\\felix\\FrontEnd_CEG"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "C:\\laragon\\www\\FrontEnd_CEG",
+  "appDir": "C:\\Users\\felix\\FrontEnd_CEG",
   "relativeAppDir": "",
   "files": [
     ".next\\routes-manifest.json",

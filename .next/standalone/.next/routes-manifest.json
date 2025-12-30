@@ -71,6 +71,12 @@
       "namedRegex": "^/admin(?:/)?$"
     },
     {
+      "page": "/AdminRegistrasi",
+      "regex": "^/AdminRegistrasi(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/AdminRegistrasi(?:/)?$"
+    },
+    {
       "page": "/favicon.ico",
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},

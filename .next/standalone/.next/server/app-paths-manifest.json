@@ -13,6 +13,7 @@
   "/(peserta)/rally/page": "app/(peserta)/rally/page.js",
   "/(peserta)/rally/sort-the-process/page": "app/(peserta)/rally/sort-the-process/page.js",
   "/(peserta)/rally/structure-of-atomic/page": "app/(peserta)/rally/structure-of-atomic/page.js",
+  "/AdminRegistrasi/page": "app/AdminRegistrasi/page.js",
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js"

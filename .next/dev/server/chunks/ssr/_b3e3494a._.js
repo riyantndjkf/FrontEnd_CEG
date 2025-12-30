@@ -591,13 +591,13 @@ function Navbar() {
                                                         lineNumber: 157,
                                                         columnNumber: 21
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DropdownMenuMenuItem, {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenuItem"], {
                                                         onClick: handleLogout,
                                                         className: "text-red-600 font-bold cursor-pointer",
                                                         children: "Logout"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                        lineNumber: 158,
+                                                        lineNumber: 159,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
@@ -620,7 +620,7 @@ function Navbar() {
                                 children: "Login"
                             }, void 0, false, {
                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                lineNumber: 167,
+                                lineNumber: 168,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
@@ -636,18 +636,18 @@ function Navbar() {
                                 size: 28
                             }, void 0, false, {
                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                lineNumber: 176,
+                                lineNumber: 177,
                                 columnNumber: 31
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Menu$3e$__["Menu"], {
                                 size: 28
                             }, void 0, false, {
                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                lineNumber: 176,
+                                lineNumber: 177,
                                 columnNumber: 49
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 175,
+                            lineNumber: 176,
                             columnNumber: 11
                         }, this)
                     ]
@@ -670,12 +670,12 @@ function Navbar() {
                         children: link.label
                     }, link.id, false, {
                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                        lineNumber: 185,
+                        lineNumber: 186,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                lineNumber: 183,
+                lineNumber: 184,
                 columnNumber: 9
             }, this)
         ]

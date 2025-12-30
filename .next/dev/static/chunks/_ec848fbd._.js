@@ -80,13 +80,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$intercep
 ;
 ;
 const createAxiosInstance = (options = {}, axiosConfig = {})=>{
-    // Bagian ini mengambil URL dari file .env
-    // Jika .env tidak terbaca, ia akan default ke localhost:5000
-    const baseUrl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const baseUrl = ("TURBOPACK compile-time value", "http://localhost:5000") || "http://localhost:5000";
     const instance = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].create({
-        baseURL: 'https://api.cegubaya.com/api',
+        baseURL: `${baseUrl}/api`,
         headers: {
-            "Content-Type": "application/json",
+            // HAPUS "Content-Type": "application/json", AGAR AXIOS OTOMATIS MENDETEKSI FORM DATA
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
             "Expires": "0"
@@ -107,6 +105,8 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "use strict";
 
 __turbopack_context__.s([
+    "admin",
+    ()=>admin,
     "auth",
     ()=>auth,
     "battleAbn",
@@ -126,7 +126,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$intercep
 const handleRequest = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$interceptors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createHandleRequest"])();
 const axiosInstance = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$services$2f$axiosInstances$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createAxiosInstance"])();
 const auth = {
-    login: (data)=>handleRequest(axiosInstance.post("/auth/login", data))
+    login: (data)=>handleRequest(axiosInstance.post("/auth/login", data)),
+    // FUNGSI REGISTER BARU
+    register: (data)=>handleRequest(axiosInstance.post("/auth/register", data)),
+    registerAdmin: (data)=>handleRequest(axiosInstance.post("/auth/register-admin", data))
 };
 const penpos = {
     getPos: ()=>handleRequest(axiosInstance.get("/penpos/get-pos")),
@@ -148,6 +151,16 @@ const rally = {
 };
 const battleAbn = {
     getCard: (data)=>handleRequest(axiosInstance.post("/user/abn/get-card", data))
+};
+const admin = {
+    // Ambil semua tim untuk dashboard
+    getAllTeams: ()=>handleRequest(axiosInstance.get("/admin/get-all-teams")),
+    // Ambil detail satu tim
+    getTeamDetail: (teamId)=>handleRequest(axiosInstance.get(`/admin/get-team-detail/${teamId}`)),
+    // Update status verifikasi
+    verifyTeam: (teamId, status)=>handleRequest(axiosInstance.put(`/admin/verify-payment/${teamId}`, {
+            status
+        }))
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
@@ -634,7 +647,6 @@ function Navbar() {
             const sectionToNavMap = {
                 home: "home",
                 gallery: "home",
-                timeline: "home",
                 "competition-details": "home",
                 "pre-event": "pre-event",
                 resources: "pre-event",
@@ -725,7 +737,7 @@ function Navbar() {
                                     height: 40
                                 }, void 0, false, {
                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                    lineNumber: 115,
+                                    lineNumber: 114,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -733,13 +745,13 @@ function Navbar() {
                                     children: "CEG 2026"
                                 }, void 0, false, {
                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                    lineNumber: 116,
+                                    lineNumber: 115,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 114,
+                            lineNumber: 113,
                             columnNumber: 11
                         }, this),
                         !isAuthPage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -756,19 +768,19 @@ function Navbar() {
                                             className: "absolute -bottom-1 left-0 w-full h-0.5 bg-teal-800 rounded-full animate-in fade-in slide-in-from-bottom-1 duration-500"
                                         }, void 0, false, {
                                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                            lineNumber: 135,
+                                            lineNumber: 134,
                                             columnNumber: 23
                                         }, this)
                                     ]
                                 }, link.id, true, {
                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                    lineNumber: 125,
+                                    lineNumber: 124,
                                     columnNumber: 19
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 121,
+                            lineNumber: 120,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -782,7 +794,7 @@ function Navbar() {
                                         children: "Rally"
                                     }, void 0, false, {
                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                        lineNumber: 147,
+                                        lineNumber: 146,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenu"], {
@@ -795,12 +807,12 @@ function Navbar() {
                                                     children: user
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                    lineNumber: 152,
+                                                    lineNumber: 151,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                lineNumber: 151,
+                                                lineNumber: 150,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenuContent"], {
@@ -811,15 +823,15 @@ function Navbar() {
                                                         children: "Akun Saya"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                        lineNumber: 157,
+                                                        lineNumber: 156,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenuSeparator"], {}, void 0, false, {
                                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                        lineNumber: 158,
+                                                        lineNumber: 157,
                                                         columnNumber: 21
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(DropdownMenuMenuItem, {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DropdownMenuItem"], {
                                                         onClick: handleLogout,
                                                         className: "text-red-600 font-bold cursor-pointer",
                                                         children: "Logout"
@@ -831,13 +843,13 @@ function Navbar() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                lineNumber: 156,
+                                                lineNumber: 155,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                        lineNumber: 150,
+                                        lineNumber: 149,
                                         columnNumber: 17
                                     }, this)
                                 ]
@@ -853,7 +865,7 @@ function Navbar() {
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 144,
+                            lineNumber: 143,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -881,12 +893,12 @@ function Navbar() {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                    lineNumber: 111,
+                    lineNumber: 110,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                lineNumber: 110,
+                lineNumber: 109,
                 columnNumber: 7
             }, this),
             mobileMenuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -909,7 +921,7 @@ function Navbar() {
         ]
     }, void 0, true, {
         fileName: "[project]/components/shared/Dashboard/navbar.js",
-        lineNumber: 109,
+        lineNumber: 108,
         columnNumber: 5
     }, this);
 }

@@ -11,7 +11,7 @@ import { logout as logoutUser } from "@/core/feature/user/userSlice";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuItem, // Namanya ini
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -155,9 +155,10 @@ const handleScroll = (e, href) => {
                   <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md">
                     <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuMenuItem onClick={handleLogout} className="text-red-600 font-bold cursor-pointer">
+                    {/* PERBAIKAN DI SINI: Gunakan DropdownMenuItem bukan DropdownMenuMenuItem */}
+                    <DropdownMenuItem onClick={handleLogout} className="text-red-600 font-bold cursor-pointer">
                       Logout
-                    </DropdownMenuMenuItem>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>

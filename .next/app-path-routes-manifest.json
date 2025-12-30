@@ -13,6 +13,7 @@
   "/(peserta)/rally/page": "/rally",
   "/(peserta)/rally/sort-the-process/page": "/rally/sort-the-process",
   "/(peserta)/rally/structure-of-atomic/page": "/rally/structure-of-atomic",
+  "/AdminRegistrasi/page": "/AdminRegistrasi",
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
   "/favicon.ico/route": "/favicon.ico"

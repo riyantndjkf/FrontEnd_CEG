@@ -8,6 +8,11 @@ const axiosInstance = createAxiosInstance();
 export const auth = {
   login: (data) =>
     handleRequest(axiosInstance.post("/auth/login", data)),
+  
+  // FUNGSI REGISTER BARU
+  register: (data) =>
+    handleRequest(axiosInstance.post("/auth/register", data)),
+  registerAdmin: (data) => handleRequest(axiosInstance.post("/auth/register-admin", data)),
 };
 
 export const penpos = {
@@ -43,4 +48,26 @@ export const rally = {
 export const battleAbn = {
   getCard: (data) =>
     handleRequest(axiosInstance.post("/user/abn/get-card", data)),
+};
+
+export const admin = {
+  // Ambil semua tim
+  getAllTeams: () => 
+    handleRequest(axiosInstance.get("/admin/get-all-teams")),
+
+  // Ambil detail tim
+  getTeamDetail: (teamId) => 
+    handleRequest(axiosInstance.get(`/admin/get-team-detail/${teamId}`)),
+
+  // === PERBAIKAN DI SINI: GUNAKAN FORMDATA ===
+  verifyTeam: (teamId, status) => {
+    // 1. Buat FormData
+    const formData = new FormData();
+    formData.append("status", status);
+
+    // 2. Kirim FormData (Header akan otomatis diatur oleh Axios)
+    return handleRequest(
+      axiosInstance.put(`/admin/verify-payment/${teamId}`, formData)
+    );
+  },
 };
