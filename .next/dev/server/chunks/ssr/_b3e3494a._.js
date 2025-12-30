@@ -405,44 +405,36 @@ function Navbar() {
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$store$2f$hooks$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAppDispatch"])();
     const [mobileMenuOpen, setMobileMenuOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isMounted, setIsMounted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [activeNav, setActiveNav] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("home"); // State untuk menu yang nyala
+    const [activeNav, setActiveNav] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("home");
     const token = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$store$2f$hooks$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAppSelector"])((state)=>state.token.token);
     const user = (0, __TURBOPACK__imported__module__$5b$project$5d2f$core$2f$store$2f$hooks$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAppSelector"])((state)=>state.user.user);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setIsMounted(true);
     }, []);
-    // LOGIKA DETEKSI SCROLL BERDASARKAN GRUP SECTION
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        // List semua ID section yang ada di page kamu
-        const sectionIds = [
-            "home",
-            "timeline",
-            "pre-event",
-            "resources",
-            "faq"
-        ];
-        // Mapping: Section ID mana yang masuk ke Menu Navigasi mana
-        const navMapping = {
+        if (pathname !== "/") return;
+        const sectionToNavMap = {
             home: "home",
-            timeline: "home",
+            gallery: "home",
+            "competition-details": "home",
             "pre-event": "pre-event",
-            resources: "faq",
-            faq: "faq"
-        };
-        const observerOptions = {
-            root: null,
-            rootMargin: "-45% 0px -45% 0px",
-            threshold: 0
+            resources: "pre-event",
+            faq: "faq",
+            "CP&Partner": "faq"
         };
         const observer = new IntersectionObserver((entries)=>{
             entries.forEach((entry)=>{
                 if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    setActiveNav(navMapping[id]); // Set menu yang nyala berdasarkan mapping
+                    const nav = sectionToNavMap[entry.target.id];
+                    if (nav) setActiveNav(nav);
                 }
             });
-        }, observerOptions);
-        sectionIds.forEach((id)=>{
+        }, {
+            root: null,
+            rootMargin: "-40% 0px -40% 0px",
+            threshold: 0
+        });
+        Object.keys(sectionToNavMap).forEach((id)=>{
             const el = document.getElementById(id);
             if (el) observer.observe(el);
         });
@@ -475,17 +467,16 @@ function Navbar() {
     };
     const handleScroll = (e, href)=>{
         if (pathname !== "/") return;
-        if (href.startsWith("#")) {
-            e.preventDefault();
-            const id = href.replace("#", "");
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: "smooth"
-                });
-            }
-            setMobileMenuOpen(false);
+        e.preventDefault();
+        const id = href.replace("#", "");
+        setActiveNav(id);
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({
+                behavior: "smooth"
+            });
         }
+        setMobileMenuOpen(false);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
         className: "fixed top-0 left-0 right-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30",
@@ -506,7 +497,7 @@ function Navbar() {
                                     height: 40
                                 }, void 0, false, {
                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                    lineNumber: 108,
+                                    lineNumber: 114,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -514,13 +505,13 @@ function Navbar() {
                                     children: "CEG 2026"
                                 }, void 0, false, {
                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                    lineNumber: 109,
+                                    lineNumber: 115,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 107,
+                            lineNumber: 113,
                             columnNumber: 11
                         }, this),
                         !isAuthPage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -537,19 +528,19 @@ function Navbar() {
                                             className: "absolute -bottom-1 left-0 w-full h-0.5 bg-teal-800 rounded-full animate-in fade-in slide-in-from-bottom-1 duration-500"
                                         }, void 0, false, {
                                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                            lineNumber: 128,
+                                            lineNumber: 134,
                                             columnNumber: 23
                                         }, this)
                                     ]
                                 }, link.id, true, {
                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                    lineNumber: 118,
+                                    lineNumber: 124,
                                     columnNumber: 19
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 114,
+                            lineNumber: 120,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -563,7 +554,7 @@ function Navbar() {
                                         children: "Rally"
                                     }, void 0, false, {
                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                        lineNumber: 140,
+                                        lineNumber: 146,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenu"], {
@@ -576,12 +567,12 @@ function Navbar() {
                                                     children: user
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                    lineNumber: 145,
+                                                    lineNumber: 151,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                lineNumber: 144,
+                                                lineNumber: 150,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenuContent"], {
@@ -592,48 +583,49 @@ function Navbar() {
                                                         children: "Akun Saya"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                        lineNumber: 150,
+                                                        lineNumber: 156,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenuSeparator"], {}, void 0, false, {
                                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                        lineNumber: 151,
+                                                        lineNumber: 157,
                                                         columnNumber: 21
                                                     }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dropdown$2d$menu$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DropdownMenuItem"], {
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DropdownMenuMenuItem, {
                                                         onClick: handleLogout,
                                                         className: "text-red-600 font-bold cursor-pointer",
                                                         children: "Logout"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                        lineNumber: 152,
+                                                        lineNumber: 158,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                                lineNumber: 149,
+                                                lineNumber: 155,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                        lineNumber: 143,
+                                        lineNumber: 149,
                                         columnNumber: 17
                                     }, this)
                                 ]
-                            }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            }, void 0, true) : // Tombol Login hanya muncul jika BUKAN halaman login/register dan BUKAN kondisi sudah login
+                            !isAuthPage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: "/login",
                                 className: "bg-teal-800 hover:bg-teal-900 text-white px-8 py-2 rounded-full font-bold transition shadow-lg",
                                 children: "Login"
                             }, void 0, false, {
                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                lineNumber: 159,
-                                columnNumber: 15
+                                lineNumber: 167,
+                                columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 137,
+                            lineNumber: 143,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -644,29 +636,29 @@ function Navbar() {
                                 size: 28
                             }, void 0, false, {
                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                lineNumber: 167,
+                                lineNumber: 176,
                                 columnNumber: 31
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Menu$3e$__["Menu"], {
                                 size: 28
                             }, void 0, false, {
                                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                                lineNumber: 167,
+                                lineNumber: 176,
                                 columnNumber: 49
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/shared/Dashboard/navbar.js",
-                            lineNumber: 166,
+                            lineNumber: 175,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/shared/Dashboard/navbar.js",
-                    lineNumber: 104,
+                    lineNumber: 110,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                lineNumber: 103,
+                lineNumber: 109,
                 columnNumber: 7
             }, this),
             mobileMenuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -678,18 +670,18 @@ function Navbar() {
                         children: link.label
                     }, link.id, false, {
                         fileName: "[project]/components/shared/Dashboard/navbar.js",
-                        lineNumber: 176,
+                        lineNumber: 185,
                         columnNumber: 13
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/shared/Dashboard/navbar.js",
-                lineNumber: 174,
+                lineNumber: 183,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/shared/Dashboard/navbar.js",
-        lineNumber: 102,
+        lineNumber: 108,
         columnNumber: 5
     }, this);
 }

@@ -13,6 +13,7 @@ import { setUser } from "@/core/feature/user/userSlice";
 import { setRole } from "@/core/feature/role/roleSlice";
 import Image from 'next/image';
 import Navbar from "@/components/shared/Dashboard/navbar";
+import Link from "next/link";
 
 const loginSchema = Yup.object({
   nama: Yup.string().required("Nama harus diisi"),
@@ -155,6 +156,20 @@ export default function LoginPage() {
                 >
                   Login
                 </button>
+              </div>
+
+              {/* Submit Button & Register Link */}
+              <div className="flex flex-col items-center gap-4 pt-2 md:pt-4">
+                {/* Tambahan Link Daftar */}
+                <p className="text-black drop-shadow-md font-medium text-sm md:text-base">
+                  Belum punya akun?{" "}
+                  <Link 
+                    href="/register" 
+                    className="text-black-300 font-bold hover:text-teal-400 hover:underline transition-colors drop-shadow-sm"
+                  >
+                    Daftar di sini
+                  </Link>
+                </p>
               </div>
             </form>
           </div>

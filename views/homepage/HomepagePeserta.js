@@ -21,7 +21,6 @@ export default function HomepagePeserta() {
         { id: 4, question: "Bagaimana cara akses berkas?", answer: "Semua berkas bisa diunduh di bagian Resources di bawah ini." }
     ];
 
-    // CSS Standard untuk judul section
     const sectionTitleStyle = `
         drop-shadow-2xl 
         w-[260px] 
@@ -57,7 +56,7 @@ export default function HomepagePeserta() {
             </div>
 
             {/* ===== SECTION 1: HOME ===== */}
-            <section className="h-screen w-full flex flex-col items-center justify-center snap-start px-4">
+            <section id="home" className="h-screen w-full flex flex-col items-center justify-center snap-start px-4">
                 <div className="flex flex-col items-center text-center max-w-5xl">
                     <div className="relative w-full max-w-2xl h-[120px] md:h-[180px] mb-8 animate-in fade-in zoom-in duration-700">
                         <Image
@@ -82,9 +81,11 @@ export default function HomepagePeserta() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Button asChild className="bg-teal-800 hover:bg-teal-900 text-white px-8 py-6 rounded-full text-lg font-bold shadow-lg transition-transform hover:scale-105">
-                            <Link href="#pre-event">Daftar Sekarang</Link>
+                        <Button asChild className="bg-teal-800 hover:bg-teal-900 text-white px-12 py-7 rounded-full text-xl font-bold shadow-lg transition-transform hover:scale-105">
+                            {/* Diarahkan ke halaman register sesuai request */}
+                            <Link href="/register">Daftar Sekarang</Link>
                         </Button>
+
                         <Button asChild variant="ghost" className="bg-[#a397c0]/80 hover:bg-[#a397c0] px-8 py-6 rounded-full text-lg font-bold shadow-lg backdrop-blur-sm transition-transform hover:scale-105">
                             <Link href="#gallery">Lainnya →</Link>
                         </Button>
@@ -94,7 +95,6 @@ export default function HomepagePeserta() {
 
             {/* ===== SECTION 2: GALLERY & ABOUT ===== */}
             <section id="gallery" className={sectionWrapper}>
-                {/* Gallery Slider */}
                 <div className="relative w-full max-w-6xl mx-auto flex items-center justify-center mb-12">
                     <button onClick={prev} className="absolute left-0 z-20 bg-white/70 hover:bg-white text-teal-800 rounded-full w-10 h-10 flex items-center justify-center shadow">‹</button>
                     <div className="flex items-center justify-center gap-6 overflow-hidden w-full">
@@ -107,7 +107,6 @@ export default function HomepagePeserta() {
                     <button onClick={next} className="absolute right-0 z-20 bg-white/70 hover:bg-white text-teal-800 rounded-full w-10 h-10 flex items-center justify-center shadow">›</button>
                 </div>
 
-                {/* Info Section */}
                 <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
                     <div className="md:col-span-8 flex flex-col items-start">
                         <div className="w-full mb-6">
@@ -135,43 +134,38 @@ export default function HomepagePeserta() {
                 </div>
             </section>
 
-            {/* ===== SECTION: TIMELINE ===== */}
+            {/* ===== SECTION: DETAILS ===== */}
             <section id="competition-details" className={sectionWrapper}>
-                <div className="mb-6">
+                <div className="mb-10">
                     <Image src="/Asset/TIMELINE.png" alt="Timeline" width={400} height={100} className={sectionTitleStyle} />
                 </div>
-                <div className="relative w-full max-w-4xl"> 
-                    <Image src="/Asset/TIMELINE (1).png" alt="Schedule" width={1200} height={600} className="w-full h-auto drop-shadow-2xl" />
+                <div className="relative w-full max-w-4xl mb-20"> 
+                    <Image src="/Asset/TIMELINE (1).png" alt="Schedule" width={1200} height={600} className="w-full h-auto drop-shadow-2xl scale-110" />
                 </div>
-            </section>
-
-            {/* ===== SECTION: BABAK PERLOMBAAN ===== */}
-            <section id="competition-details" className={sectionWrapper}>
-                <div className="mb-6">
-                    <Image src="/Asset/BABAK PERLOMBAAN (1).png" alt="Babak" width={400} height={100} className={sectionTitleStyle} />
+                <div>
+                    <Image src="/Asset/BABAK PERLOMBAAN (1).png" alt="Babak" width={550} height={150} className={`${sectionTitleStyle} scale-125`} />
                 </div>
-                <div className="relative w-full max-w-4xl"> 
-                    <Image src="/Asset/BABAK PERLOMBAAN.png" alt="Detail" width={1200} height={600} className="w-full h-auto drop-shadow-2xl" />
+                <div className="relative w-full max-w-4xl -mt-5"> 
+                    <Image src="/Asset/BABAK PERLOMBAAN.png" alt="Detail" width={1200} height={600} className="w-full h-auto drop-shadow-2xl scale-110" />
                 </div>
             </section>
 
             {/* ===== SECTION: PRE-EVENT ===== */}
             <section id="pre-event" className={sectionWrapper}>
-                <div className="mb-6">
+                <div className="mt-10">
                     <Image src="/Asset/PRE-EVENT (1) (1).png" alt="Pre-Event" width={400} height={100} className={sectionTitleStyle} />
                 </div>
-                <div className="relative w-full max-w-4xl"> 
+                <div className="relative w-full max-w-4xl -mt-5"> 
                     <Image src="/Asset/PRE-EVENT.png" alt="Poster" width={1200} height={600} className="w-full h-auto drop-shadow-2xl" />
                 </div>
             </section>
 
             {/* ===== SECTION: RESOURCES ===== */}
             <section id="resources" className={sectionWrapper}>
-                <div className="mb-12">
+                <div className="-mt-10">
                     <Image src="/Asset/RESOURCES.png" alt="Resources" width={400} height={100} className={sectionTitleStyle} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
-                    {/* Card Booklet */}
                     <div className="bg-white/40 backdrop-blur-md border border-white/60 rounded-[40px] p-8 shadow-2xl flex flex-col items-center group">
                         <Image src="/Asset/RESOURCES BOOKLET.png" alt="Icon" width={150} height={150} className="mb-6 group-hover:scale-105 transition-transform" />
                         <h3 className="text-2xl font-black text-teal-950 mb-2">Booklet Peserta</h3>
@@ -180,7 +174,6 @@ export default function HomepagePeserta() {
                             <Link href="/Asset/GUIDELINE.pdf">Download Booklet</Link>
                         </Button>
                     </div>
-                    {/* Card SOP */}
                     <div className="bg-white/40 backdrop-blur-md border border-white/60 rounded-[40px] p-8 shadow-2xl flex flex-col items-center group">
                         <Image src="/Asset/RESOURCES SOP.png" alt="Icon" width={150} height={150} className="mb-6 group-hover:scale-105 transition-transform" />
                         <h3 className="text-2xl font-black text-teal-950 mb-2">SOP Lomba</h3>
@@ -210,10 +203,10 @@ export default function HomepagePeserta() {
             </section>
 
             {/* ===== SECTION: CONTACT & PARTNERS ===== */}
-            <section className="relative w-full h-fit snap-start bg-transparent p-0 m-0">
+            <section id="CP&Partner" className="relative w-full h-fit snap-start bg-transparent p-0 m-0">
                 <div className="w-full flex flex-col p-0 m-0">
                     <img src="/Asset/CONTACT PERSON.png" alt="Contact" className="w-full h-auto block" />
-                    <img src="/Asset/MEDIA PARTNER.png" alt="Media" className="w-full h-auto block -mt-1" />
+                    <img src="/Asset/MEDIA PARTNER (1).png" alt="Media" className="w-full h-auto block -mt-1" />
                 </div>
             </section>
         </div>

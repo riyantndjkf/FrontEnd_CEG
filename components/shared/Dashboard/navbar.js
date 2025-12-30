@@ -25,7 +25,7 @@ export default function Navbar() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [activeNav, setActiveNav] = useState("home"); // State untuk menu yang nyala
+  const [activeNav, setActiveNav] = useState("home");
 
   const token = useAppSelector((state) => state.token.token);
   const user = useAppSelector((state) => state.user.user);
@@ -34,42 +34,45 @@ export default function Navbar() {
     setIsMounted(true);
   }, []);
 
-  // LOGIKA DETEKSI SCROLL BERDASARKAN GRUP SECTION
   useEffect(() => {
-    // List semua ID section yang ada di page kamu
-    const sectionIds = ["home", "timeline", "pre-event", "resources", "faq"];
-    
-    // Mapping: Section ID mana yang masuk ke Menu Navigasi mana
-    const navMapping = {
-      home: "home",
-      timeline: "home",   // Timeline masih dianggap bagian 'Home'
-      "pre-event": "pre-event",
-      resources: "faq",   // Resources dianggap bagian 'FAQ'
-      faq: "faq"
-    };
+  if (pathname !== "/") return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-45% 0px -45% 0px", // Deteksi saat section di tengah layar
-      threshold: 0,
-    };
+  const sectionToNavMap = {
+    home: "home",
+    gallery: "home",
+    "competition-details": "home",
 
-    const observer = new IntersectionObserver((entries) => {
+    "pre-event": "pre-event",
+    resources: "pre-event",
+
+    faq: "faq",
+    "CP&Partner": "faq",
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const id = entry.target.id;
-          setActiveNav(navMapping[id]); // Set menu yang nyala berdasarkan mapping
+          const nav = sectionToNavMap[entry.target.id];
+          if (nav) setActiveNav(nav);
         }
       });
-    }, observerOptions);
+    },
+    {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // fokus tengah layar
+      threshold: 0,
+    }
+  );
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+  Object.keys(sectionToNavMap).forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
 
-    return () => observer.disconnect();
-  }, [pathname]);
+  return () => observer.disconnect();
+}, [pathname]);
+
 
   const isAuthPage = pathname === "/login" || pathname === "/register";
 
@@ -85,18 +88,21 @@ export default function Navbar() {
     router.push("/");
   };
 
-  const handleScroll = (e, href) => {
-    if (pathname !== "/") return;
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const id = href.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-      setMobileMenuOpen(false);
-    }
-  };
+const handleScroll = (e, href) => {
+  if (pathname !== "/") return;
+  e.preventDefault();
+
+  const id = href.replace("#", "");
+  setActiveNav(id);
+
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  setMobileMenuOpen(false);
+};
+
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
@@ -133,7 +139,7 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* ACTION BUTTON */}
+          {/* ACTION BUTTON - Sekarang tidak muncul di halaman Login/Register */}
           <div className="hidden md:flex items-center gap-4">
             {!isMounted ? null : token ? (
               <>
@@ -143,22 +149,25 @@ export default function Navbar() {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="border-teal-800/30 text-teal-900 bg-white/40 rounded-full font-bold px-5">
-                       {user}
+                        {user}
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md">
                     <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout} className="text-red-600 font-bold cursor-pointer">
+                    <DropdownMenuMenuItem onClick={handleLogout} className="text-red-600 font-bold cursor-pointer">
                       Logout
-                    </DropdownMenuItem>
+                    </DropdownMenuMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
             ) : (
-              <Link href="/login" className="bg-teal-800 hover:bg-teal-900 text-white px-8 py-2 rounded-full font-bold transition shadow-lg">
-                Login
-              </Link>
+              // Tombol Login hanya muncul jika BUKAN halaman login/register dan BUKAN kondisi sudah login
+              !isAuthPage && (
+                <Link href="/login" className="bg-teal-800 hover:bg-teal-900 text-white px-8 py-2 rounded-full font-bold transition shadow-lg">
+                  Login
+                </Link>
+              )
             )}
           </div>
 
@@ -182,6 +191,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          {}
         </div>
       )}
     </nav>
