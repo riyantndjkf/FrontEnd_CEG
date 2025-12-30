@@ -5,12 +5,20 @@ export const createAxiosInstance = (
     options = {},
     axiosConfig = {}
 ) => {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    // === PERUBAHAN DI SINI ===
+    // Ganti localhost dengan IP Public Server Anda.
+    // (Port 5000 harus dipastikan terbuka di firewall server)
+    
+    // Opsi 1: Hardcode (Paling Cepat & Pasti Jalan)
+    const baseUrl = "http://103.163.138.117:5000"; 
+    
+    // Opsi 2: Kalau mau pakai .env (Pastikan di .env file isinya benar)
+    // const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://103.163.138.117:5000";
 
     const instance = axios.create({
         baseURL: `${baseUrl}/api`, 
         headers: {
-            // HAPUS "Content-Type": "application/json", AGAR AXIOS OTOMATIS MENDETEKSI FORM DATA
+            // "Content-Type" DIHAPUS agar otomatis mendeteksi FormData (Upload Gambar)
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
             "Expires": "0",

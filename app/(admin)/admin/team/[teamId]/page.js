@@ -11,7 +11,7 @@ import Image from "next/image";
 const getImageUrl = (filename) => {
   if (!filename) return null;
   // Sesuaikan port backend Anda (5000)
-  return `http://localhost:5000/public/uploads/${filename}`;
+  return `http://103.163.138.117:5000/public/uploads/${filename}`;
 };
 
 export default function TeamDetailPage() {
