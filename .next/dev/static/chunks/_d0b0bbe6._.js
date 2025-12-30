@@ -128,42 +128,23 @@ function HomepagePeserta() {
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex flex-col sm:flex-row gap-4",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    asChild: true,
-                                    className: "bg-teal-800 hover:bg-teal-900 text-white px-12 py-7 rounded-full text-xl font-bold shadow-lg transition-transform hover:scale-105",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                        href: "/register",
-                                        children: "Daftar Sekarang"
-                                    }, void 0, false, {
-                                        fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 86,
-                                        columnNumber: 29
-                                    }, this)
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                asChild: true,
+                                className: "bg-teal-800 hover:bg-teal-900 text-white px-12 py-7 rounded-full text-xl font-bold shadow-lg transition-transform hover:scale-105",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                    href: "/register",
+                                    children: "Daftar Sekarang"
                                 }, void 0, false, {
                                     fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                    lineNumber: 84,
-                                    columnNumber: 25
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    asChild: true,
-                                    variant: "ghost",
-                                    className: "bg-[#a397c0]/80 hover:bg-[#a397c0] px-8 py-6 rounded-full text-lg font-bold shadow-lg backdrop-blur-sm transition-transform hover:scale-105",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                        href: "#gallery",
-                                        children: "Lainnya →"
-                                    }, void 0, false, {
-                                        fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 90,
-                                        columnNumber: 29
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                    lineNumber: 89,
-                                    columnNumber: 25
+                                    lineNumber: 86,
+                                    columnNumber: 29
                                 }, this)
-                            ]
-                        }, void 0, true, {
+                            }, void 0, false, {
+                                fileName: "[project]/views/homepage/HomepagePeserta.js",
+                                lineNumber: 84,
+                                columnNumber: 25
+                            }, this)
+                        }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
                             lineNumber: 83,
                             columnNumber: 21
@@ -192,7 +173,7 @@ function HomepagePeserta() {
                                 children: "‹"
                             }, void 0, false, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 99,
+                                lineNumber: 95,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -206,17 +187,17 @@ function HomepagePeserta() {
                                             className: "object-cover rounded-[25px]"
                                         }, void 0, false, {
                                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                            lineNumber: 103,
+                                            lineNumber: 99,
                                             columnNumber: 33
                                         }, this)
                                     }, i, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 102,
+                                        lineNumber: 98,
                                         columnNumber: 29
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 100,
+                                lineNumber: 96,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -225,13 +206,13 @@ function HomepagePeserta() {
                                 children: "›"
                             }, void 0, false, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 107,
+                                lineNumber: 103,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 98,
+                        lineNumber: 94,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -250,12 +231,12 @@ function HomepagePeserta() {
                                             className: "drop-shadow-xl w-full max-w-[500px] h-auto object-contain object-left"
                                         }, void 0, false, {
                                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                            lineNumber: 113,
+                                            lineNumber: 109,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 112,
+                                        lineNumber: 108,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -266,7 +247,7 @@ function HomepagePeserta() {
                                                 children: "TEMA"
                                             }, void 0, false, {
                                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                                lineNumber: 116,
+                                                lineNumber: 112,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -274,7 +255,7 @@ function HomepagePeserta() {
                                                 children: "AGRINOVA: Agricultural Innovation for Sustainable Nutrition Advancement"
                                             }, void 0, false, {
                                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                                lineNumber: 117,
+                                                lineNumber: 113,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -282,7 +263,7 @@ function HomepagePeserta() {
                                                 children: "MASKOT"
                                             }, void 0, false, {
                                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                                lineNumber: 118,
+                                                lineNumber: 114,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -290,19 +271,19 @@ function HomepagePeserta() {
                                                 children: "AGRINOVA menggambarkan sebuah ledakan inovasi yang lahir dari dunia pertanian sebagai respons terhadap tantangan pangan masa kini dan masa depan. Kata “Nova” berarti bintang baru, yang menjadi simbol munculnya gagasan, pendekatan, dan terobosan baru dalam menciptakan sistem pangan yang lebih sehat, efisien, dan ramah lingkungan. Melalui konsep ini, AGRINOVA merepresentasikan semangat pembaruan dan kreativitas dalam mengembangkan pertanian modern yang tidak hanya berorientasi pada hasil, tetapi juga pada keberlanjutan dan kualitas. AGRINOVA merupakan langkah transformasi dari pertanian tradisional menuju sistem pangan masa depan yang berbasis pada sains, teknologi, dan prinsip keberlanjutan, guna mendukung ketahanan pangan serta kesejahteraan generasi mendatang."
                                             }, void 0, false, {
                                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                                lineNumber: 119,
+                                                lineNumber: 115,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 115,
+                                        lineNumber: 111,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 111,
+                                lineNumber: 107,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -315,24 +296,24 @@ function HomepagePeserta() {
                                     className: "w-full h-auto drop-shadow-2xl animate-bounce-slow object-contain"
                                 }, void 0, false, {
                                     fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                    lineNumber: 132,
+                                    lineNumber: 128,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 131,
+                                lineNumber: 127,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 110,
+                        lineNumber: 106,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                lineNumber: 97,
+                lineNumber: 93,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -349,12 +330,12 @@ function HomepagePeserta() {
                             className: sectionTitleStyle
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 140,
+                            lineNumber: 136,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 139,
+                        lineNumber: 135,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -367,12 +348,12 @@ function HomepagePeserta() {
                             className: "w-full h-auto drop-shadow-2xl scale-110"
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 143,
+                            lineNumber: 139,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 142,
+                        lineNumber: 138,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -384,16 +365,16 @@ function HomepagePeserta() {
                             className: `${sectionTitleStyle} scale-125`
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 146,
+                            lineNumber: 142,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 145,
+                        lineNumber: 141,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "relative w-full max-w-4xl -mt-5",
+                        className: "relative w-full max-w-4xl",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             src: "/Asset/BABAK PERLOMBAAN.png",
                             alt: "Detail",
@@ -402,18 +383,18 @@ function HomepagePeserta() {
                             className: "w-full h-auto drop-shadow-2xl scale-110"
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 149,
+                            lineNumber: 145,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 148,
+                        lineNumber: 144,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                lineNumber: 138,
+                lineNumber: 134,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -430,12 +411,12 @@ function HomepagePeserta() {
                             className: sectionTitleStyle
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 156,
+                            lineNumber: 152,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 155,
+                        lineNumber: 151,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -448,18 +429,18 @@ function HomepagePeserta() {
                             className: "w-full h-auto drop-shadow-2xl"
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 159,
+                            lineNumber: 155,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 158,
+                        lineNumber: 154,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                lineNumber: 154,
+                lineNumber: 150,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -476,12 +457,12 @@ function HomepagePeserta() {
                             className: sectionTitleStyle
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 166,
+                            lineNumber: 162,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 165,
+                        lineNumber: 161,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -498,7 +479,7 @@ function HomepagePeserta() {
                                         className: "mb-6 group-hover:scale-105 transition-transform"
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 170,
+                                        lineNumber: 166,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -506,7 +487,7 @@ function HomepagePeserta() {
                                         children: "Booklet Peserta"
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 171,
+                                        lineNumber: 167,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -514,7 +495,7 @@ function HomepagePeserta() {
                                         children: "Informasi mendalam mengenai pendaftaran dan aturan."
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 172,
+                                        lineNumber: 168,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -525,18 +506,18 @@ function HomepagePeserta() {
                                             children: "Download Booklet"
                                         }, void 0, false, {
                                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                            lineNumber: 174,
+                                            lineNumber: 170,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 173,
+                                        lineNumber: 169,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 169,
+                                lineNumber: 165,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -550,7 +531,7 @@ function HomepagePeserta() {
                                         className: "mb-6 group-hover:scale-105 transition-transform"
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 178,
+                                        lineNumber: 174,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -558,7 +539,7 @@ function HomepagePeserta() {
                                         children: "SOP Lomba"
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 179,
+                                        lineNumber: 175,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -566,7 +547,7 @@ function HomepagePeserta() {
                                         children: "Panduan operasional selama hari-H kompetisi."
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 180,
+                                        lineNumber: 176,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -577,30 +558,30 @@ function HomepagePeserta() {
                                             children: "Download SOP"
                                         }, void 0, false, {
                                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                            lineNumber: 182,
+                                            lineNumber: 178,
                                             columnNumber: 29
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 181,
+                                        lineNumber: 177,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 177,
+                                lineNumber: 173,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 168,
+                        lineNumber: 164,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                lineNumber: 164,
+                lineNumber: 160,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -617,12 +598,12 @@ function HomepagePeserta() {
                             className: sectionTitleStyle
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 191,
+                            lineNumber: 187,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 190,
+                        lineNumber: 186,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -639,7 +620,7 @@ function HomepagePeserta() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 196,
+                                        lineNumber: 192,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -649,29 +630,29 @@ function HomepagePeserta() {
                                             children: item.answer
                                         }, void 0, false, {
                                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                            lineNumber: 198,
+                                            lineNumber: 194,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                        lineNumber: 197,
+                                        lineNumber: 193,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, item.id, true, {
                                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                                lineNumber: 195,
+                                lineNumber: 191,
                                 columnNumber: 25
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/views/homepage/HomepagePeserta.js",
-                        lineNumber: 193,
+                        lineNumber: 189,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                lineNumber: 189,
+                lineNumber: 185,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -686,7 +667,7 @@ function HomepagePeserta() {
                             className: "w-full h-auto block"
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 208,
+                            lineNumber: 204,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
@@ -695,18 +676,18 @@ function HomepagePeserta() {
                             className: "w-full h-auto block -mt-1"
                         }, void 0, false, {
                             fileName: "[project]/views/homepage/HomepagePeserta.js",
-                            lineNumber: 209,
+                            lineNumber: 205,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/views/homepage/HomepagePeserta.js",
-                    lineNumber: 207,
+                    lineNumber: 203,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/views/homepage/HomepagePeserta.js",
-                lineNumber: 206,
+                lineNumber: 202,
                 columnNumber: 13
             }, this)
         ]

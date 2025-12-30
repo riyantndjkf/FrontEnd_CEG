@@ -85,10 +85,6 @@ export default function HomepagePeserta() {
                             {/* Diarahkan ke halaman register sesuai request */}
                             <Link href="/register">Daftar Sekarang</Link>
                         </Button>
-
-                        <Button asChild variant="ghost" className="bg-[#a397c0]/80 hover:bg-[#a397c0] px-8 py-6 rounded-full text-lg font-bold shadow-lg backdrop-blur-sm transition-transform hover:scale-105">
-                            <Link href="#gallery">Lainnya →</Link>
-                        </Button>
                     </div>
                 </div>
             </section>
@@ -145,7 +141,7 @@ export default function HomepagePeserta() {
                 <div>
                     <Image src="/Asset/BABAK PERLOMBAAN (1).png" alt="Babak" width={550} height={150} className={`${sectionTitleStyle} scale-125`} />
                 </div>
-                <div className="relative w-full max-w-4xl -mt-5"> 
+                <div className="relative w-full max-w-4xl"> 
                     <Image src="/Asset/BABAK PERLOMBAAN.png" alt="Detail" width={1200} height={600} className="w-full h-auto drop-shadow-2xl scale-110" />
                 </div>
             </section>
