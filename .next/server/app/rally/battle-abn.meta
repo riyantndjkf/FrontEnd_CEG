@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(peserta)/layout,_N_T_/(peserta)/rally/layout,_N_T_/(peserta)/rally/battle-abn/layout,_N_T_/(peserta)/rally/battle-abn/page,_N_T_/rally/battle-abn"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHBlc2VydGEp/rally/battle-abn/__PAGE__",
+    "/!KHBlc2VydGEp/rally/battle-abn",
+    "/!KHBlc2VydGEp/rally",
+    "/!KHBlc2VydGEp",
+    "/_index",
+    "/_head"
+  ]
+}
