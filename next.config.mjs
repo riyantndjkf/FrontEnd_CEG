@@ -11,7 +11,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '103.163.138.117',
+        hostname: 'api.cegubaya.com',
         port: '5000',
         pathname: '/public/**',
       },
