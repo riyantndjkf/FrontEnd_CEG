@@ -16,7 +16,7 @@ export const createAxiosInstance = (
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
     const instance = axios.create({
-        baseURL: baseUrl,
+        baseURL: 'https://api.cegubaya.com/api',
         headers: {
             "Content-Type": "application/json",
             "Cache-Control": "no-cache, no-store, must-revalidate",
