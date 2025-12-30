@@ -16,7 +16,7 @@ export const createAxiosInstance = (
     // const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://103.163.138.117:5000";
 
     const instance = axios.create({
-        baseURL: `${baseUrl}/api`, 
+        baseURL: `${baseUrl}`, 
         headers: {
             // "Content-Type" DIHAPUS agar otomatis mendeteksi FormData (Upload Gambar)
             "Cache-Control": "no-cache, no-store, must-revalidate",
