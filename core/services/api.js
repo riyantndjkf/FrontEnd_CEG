@@ -7,58 +7,57 @@ const axiosInstance = createAxiosInstance();
 
 export const auth = {
   login: (data) =>
-    handleRequest(axiosInstance.post("/auth/login", data)),
-  
+    handleRequest(axiosInstance.post("/api/auth/login", data)),
+
   // FUNGSI REGISTER BARU
   register: (data) =>
-    handleRequest(axiosInstance.post("/auth/register", data)),
-  registerAdmin: (data) => handleRequest(axiosInstance.post("/auth/register-admin", data)),
+    handleRequest(axiosInstance.post("/api/auth/register", data)),
+  registerAdmin: (data) => handleRequest(axiosInstance.post("/api/auth/register-admin", data)),
 };
 
 export const penpos = {
   getPos: () =>
-    handleRequest(axiosInstance.get("/penpos/get-pos")),
+    handleRequest(axiosInstance.get("/api/penpos/get-pos")),
 
   setUpdatedTeam: (currentPost) =>
-    handleRequest(axiosInstance.get("/penpos/get-list-team", { params: currentPost })),
+    handleRequest(axiosInstance.get("/api/penpos/get-list-team", { params: currentPost })),
 
   startBattle: (data) =>
-    handleRequest(axiosInstance.post("/penpos/create-game-session", data)),
+    handleRequest(axiosInstance.post("/api/penpos/create-game-session", data)),
 };
 
 export const pos = {
   getListPos: () =>
-    handleRequest(axiosInstance.get("/user/get-list-pos")),
+    handleRequest(axiosInstance.get("/api/user/get-list-pos")),
 };
 
 export const rally = {
   checkAcc: () =>
-    handleRequest(axiosInstance.get("/user/check-acc")),
+    handleRequest(axiosInstance.get("/api/user/check-acc")),
 
   getUpdatedCurrentPost: (data) =>
-    handleRequest(axiosInstance.put("/user/update-user-pos", data)),
+    handleRequest(axiosInstance.put("/api/user/update-user-pos", data)),
 
   getWaitingList: (currentPost) =>
-    handleRequest(axiosInstance.get("/penpos/get-list-team", { params: currentPost })),
+    handleRequest(axiosInstance.get("/api/penpos/get-list-team", { params: currentPost })),
 
   quitGame: () =>
-    handleRequest(axiosInstance.get("/user/exit-waiting-room")),
+    handleRequest(axiosInstance.get("/api/user/exit-waiting-room")),
 }
 
 export const battleAbn = {
   getCard: (data) =>
-    handleRequest(axiosInstance.post("/user/abn/get-card", data)),
+    handleRequest(axiosInstance.post("/api/user/abn/get-card", data)),
 };
 
 export const admin = {
   // Ambil semua tim
-  getAllTeams: () => 
-    handleRequest(axiosInstance.get("/admin/get-all-teams")),
+  getAllTeams: () =>
+    handleRequest(axiosInstance.get("/api/admin/get-all-teams")),
 
   // Ambil detail tim
-  getTeamDetail: (teamId) => 
-    handleRequest(axiosInstance.get(`/admin/get-team-detail/${teamId}`)),
-
+  getTeamDetail: (teamId) =>
+    handleRequest(axiosInstance.get(`/api/admin/get-team-detail/${teamId}`)),
   // === PERBAIKAN DI SINI: GUNAKAN FORMDATA ===
   verifyTeam: (teamId, status) => {
     // 1. Buat FormData
@@ -67,7 +66,7 @@ export const admin = {
 
     // 2. Kirim FormData (Header akan otomatis diatur oleh Axios)
     return handleRequest(
-      axiosInstance.put(`/admin/verify-payment/${teamId}`, formData)
+      axiosInstance.put(`/api/admin/verify-payment/${teamId}`, formData)
     );
   },
 };
