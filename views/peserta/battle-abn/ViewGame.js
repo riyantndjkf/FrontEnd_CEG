@@ -193,34 +193,6 @@ const BattleArena = ({ playerCard, opponentCard, battleResult, isWaiting }) => {
     );
 };
 
-// Team Info Component
-const TeamInfo = ({ teamName, health, maxHealth, score }) => {
-    const healthPercent = (health / maxHealth) * 100;
-
-    return (
-        <div className="bg-gray-900/70 border border-gray-700 rounded-lg p-4 mb-4">
-            <div className="flex justify-between items-center mb-2">
-                <h3 className="text-white font-bold">{teamName}</h3>
-                <span className="text-yellow-400 font-bold text-lg">{score}</span>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-4 overflow-hidden border border-gray-600">
-                <div
-                    className={`h-full transition-all duration-300 ${healthPercent > 50
-                        ? "bg-green-500"
-                        : healthPercent > 25
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                        }`}
-                    style={{ width: `${healthPercent}%` }}
-                />
-            </div>
-            <div className="text-xs text-gray-400 mt-1">
-                {health}/{maxHealth} HP
-            </div>
-        </div>
-    );
-};
-
 export default function ViewGame() {
     const [playerHand, setPlayerHand] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
@@ -233,6 +205,7 @@ export default function ViewGame() {
     const [opponentScore, setOpponentScore] = useState(0);
     const [gamePhase, setGamePhase] = useState("play"); // play, battle, waiting
     const [roundCount, setRoundCount] = useState(0);
+    const gameSessionId = typeof window !== 'undefined' ? localStorage.getItem("game_session_id") : null;
 
     // Initialize game
     useEffect(() => {
@@ -323,63 +296,16 @@ export default function ViewGame() {
                     Battle of ABN
                 </h1>
 
-                {/* Game Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-gray-900/70 rounded-lg p-3 text-center border border-gray-700">
-                        <div className="text-xs text-gray-400">ROUND</div>
-                        <div className="text-2xl font-bold text-yellow-400">{roundCount + 1}</div>
-                    </div>
-                    <div className="bg-gray-900/70 rounded-lg p-3 text-center border border-gray-700">
-                        <div className="text-xs text-gray-400">KARTU TERSISA</div>
-                        <div className="text-2xl font-bold text-blue-400">{playerHand.length}</div>
-                    </div>
-                    <div className="bg-gray-900/70 rounded-lg p-3 text-center border border-gray-700">
-                        <div className="text-xs text-gray-400">STATUS</div>
-                        <div className="text-sm font-bold text-green-400 capitalize">
-                            {gamePhase === "play" && "Giliran Anda"}
-                            {gamePhase === "waiting" && "Menunggu..."}
-                            {gamePhase === "ended" && "Selesai"}
-                        </div>
-                    </div>
-                    <div className="bg-gray-900/70 rounded-lg p-3 text-center border border-gray-700">
-                        <div className="text-xs text-gray-400">POIN</div>
-                        <div className="text-xl font-bold text-white">
-                            <span className="text-green-400">{playerScore}</span>
-                            <span className="text-gray-500 mx-2">:</span>
-                            <span className="text-red-400">{opponentScore}</span>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Main Game Area */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                    {/* Player Side */}
-                    <div className="bg-gray-900/50 border border-blue-600/30 rounded-lg p-4">
-                        <TeamInfo
-                            teamName="Tim Anda"
-                            health={playerHealth}
-                            maxHealth={100}
-                            score={playerScore}
-                        />
-                    </div>
+                <div className="grid grid-cols-1 gap-6 mb-6">
 
                     {/* Battle Arena */}
-                    <div className="lg:col-span-1">
+                    <div>
                         <BattleArena
                             playerCard={playerCard}
                             opponentCard={opponentCard}
                             battleResult={battleResult}
                             isWaiting={gamePhase === "waiting"}
-                        />
-                    </div>
-
-                    {/* Opponent Side */}
-                    <div className="bg-gray-900/50 border border-red-600/30 rounded-lg p-4">
-                        <TeamInfo
-                            teamName="Tim Lawan"
-                            health={opponentHealth}
-                            maxHealth={100}
-                            score={opponentScore}
                         />
                     </div>
                 </div>
@@ -436,6 +362,13 @@ export default function ViewGame() {
                         </Button>
                     </div>
                 )}
+
+                <Button
+                    disabled={gamePhase !== "play" || !selectedCard}
+                    className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    Ready
+                </Button>
             </div>
         </div>
     );

@@ -98,6 +98,8 @@ export default function WaitingListView() {
                     router.push(`/rally/${currentPostId}/battle-abn`);
                 }
 
+                localStorage.setItem("game_session_id", response?.data?.data);
+
                 return response?.data?.data || null;
             } catch (err) {
                 throw err;
