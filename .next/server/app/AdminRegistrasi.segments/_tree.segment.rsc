@@ -1,2 +1,0 @@
-:HL["/_next/static/chunks/5e698d058e623254.css","style"]
-0:{"buildId":"PGsPFhs8_5l-3mIVMg1Zu","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"AdminRegistrasi","paramType":null,"paramKey":"AdminRegistrasi","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
