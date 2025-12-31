@@ -1,23 +1,24 @@
 import axios from "axios";
 import { setupInterceptorsTo } from "./interceptors";
 
-/**
- * Creates an axios instance for a specific service with enhanced interceptors
- * @param {string} service - The service endpoint
- * @param {Object} options - Additional interceptor options
- * @param {Object} axiosConfig - Additional axios configuration
- * @returns {Object} Configured axios instance
- */
 export const createAxiosInstance = (
     options = {},
     axiosConfig = {}
 ) => {
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
+    // === PERUBAHAN DI SINI ===
+    // Ganti localhost dengan IP Public Server Anda.
+    // (Port 5000 harus dipastikan terbuka di firewall server)
+    
+    // Opsi 1: Hardcode (Paling Cepat & Pasti Jalan)
+    const baseUrl = "https://api.cegubaya.com"; 
+    
+    // Opsi 2: Kalau mau pakai .env (Pastikan di .env file isinya benar)
+    // const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://103.163.138.117:5000";
 
     const instance = axios.create({
-        baseURL: baseUrl,
+        baseURL: `${baseUrl}`, 
         headers: {
-            "Content-Type": "application/json",
+            // "Content-Type" DIHAPUS agar otomatis mendeteksi FormData (Upload Gambar)
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
             "Expires": "0",

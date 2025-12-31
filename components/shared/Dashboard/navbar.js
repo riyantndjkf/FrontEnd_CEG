@@ -11,7 +11,7 @@ import { logout as logoutUser } from "@/core/feature/user/userSlice";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuItem, // Namanya ini
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -25,6 +25,7 @@ export default function Navbar() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [activeNav, setActiveNav] = useState("home");
 
   const token = useAppSelector((state) => state.token.token);
   const user = useAppSelector((state) => state.user.user);
@@ -33,14 +34,52 @@ export default function Navbar() {
     setIsMounted(true);
   }, []);
 
-  const isLoginPage = pathname === "/login";
-  const isRegisterPage = pathname === "/register";
-  const isAuthPage = isLoginPage || isRegisterPage;
+  useEffect(() => {
+  if (pathname !== "/") return;
+
+  const sectionToNavMap = {
+    home: "home",
+    gallery: "home",
+    "competition-details": "home",
+
+    "pre-event": "pre-event",
+    resources: "pre-event",
+
+    faq: "faq",
+    "CP&Partner": "faq",
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const nav = sectionToNavMap[entry.target.id];
+          if (nav) setActiveNav(nav);
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // fokus tengah layar
+      threshold: 0,
+    }
+  );
+
+  Object.keys(sectionToNavMap).forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  return () => observer.disconnect();
+}, [pathname]);
+
+
+  const isAuthPage = pathname === "/login" || pathname === "/register";
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/pre-event", label: "Pre Event" },
-    { href: "/faq", label: "FAQ" },
+    { href: "#home", label: "Home", id: "home" },
+    { href: "#pre-event", label: "Pre Event", id: "pre-event" },
+    { href: "#faq", label: "FAQ", id: "faq" },
   ];
 
   const handleLogout = () => {
@@ -49,126 +88,111 @@ export default function Navbar() {
     router.push("/");
   };
 
+const handleScroll = (e, href) => {
+  if (pathname !== "/") return;
+  e.preventDefault();
+
+  const id = href.replace("#", "");
+  setActiveNav(id);
+
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  setMobileMenuOpen(false);
+};
+
+
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-white/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/Asset/CEG HOMEPAGE.png"
-              alt="CEG"
-              width={45}
-              height={45}
-            />
-            <span className="text-2xl font-black text-teal-900">
-              CEG 2026
-            </span>
+            <Image src="/Asset/CEG HOMEPAGE.png" alt="CEG" width={40} height={40} />
+            <span className="text-xl font-black text-teal-900 uppercase tracking-tighter">CEG 2026</span>
           </Link>
 
-          {/* NAV LINKS (HILANG DI LOGIN & REGISTER) */}
+          {/* NAV LINKS */}
           {!isAuthPage && (
             <div className="hidden md:flex items-center gap-10">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`font-bold transition ${pathname === link.href
-                    ? "text-teal-800"
-                    : "text-teal-900/70 hover:text-teal-600"
+              {navLinks.map((link) => {
+                const isActive = activeNav === link.id;
+                return (
+                  <Link
+                    key={link.id}
+                    href={link.href}
+                    onClick={(e) => handleScroll(e, link.href)}
+                    className={`relative font-bold transition-all duration-300 py-1 text-sm tracking-wide ${
+                      isActive ? "text-teal-800" : "text-teal-900/40 hover:text-teal-700"
                     }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-teal-800 rounded-full animate-in fade-in slide-in-from-bottom-1 duration-500" />
+                    )}
+                  </Link>
+                );
+              })}
             </div>
           )}
 
-
-          {/* ACTION BUTTON */}
-          <div className="hidden md:flex items-center">
+          {/* ACTION BUTTON - Sekarang tidak muncul di halaman Login/Register */}
+          <div className="hidden md:flex items-center gap-4">
             {!isMounted ? null : token ? (
               <>
+                <Button variant="ghost" className="font-bold text-teal-900 hover:bg-white/40" onClick={() => router.push('/rally')}>
+                  Rally
+                </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost">{user}</Button>
+                    <Button variant="outline" className="border-teal-800/30 text-teal-900 bg-white/40 rounded-full font-bold px-5">
+                        {user}
+                    </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>{user}</DropdownMenuLabel>
+                  <DropdownMenuContent align="end" className="w-48 bg-white/95 backdrop-blur-md">
+                    <DropdownMenuLabel>Akun Saya</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout}>
+                    {/* PERBAIKAN DI SINI: Gunakan DropdownMenuItem bukan DropdownMenuMenuItem */}
+                    <DropdownMenuItem onClick={handleLogout} className="text-red-600 font-bold cursor-pointer">
                       Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <Button variant="ghost" className="hidden md:flex font-bold text-teal-900"
-                  onClick={() => router.push('rally')}
-                >
-                  Rally
-                </Button>
               </>
-            ) : isLoginPage ? (
-              <Link
-                href="/register"
-                className="bg-teal-800 text-white px-6 py-2 rounded-full font-bold"
-              >
-                Register
-              </Link>
-            ) : isRegisterPage ? (
-              <Link
-                href="/login"
-                className="bg-teal-800 text-white px-6 py-2 rounded-full font-bold"
-              >
-                Login
-              </Link>
             ) : (
-              <Link
-                href="/login"
-                className="bg-teal-800 text-white px-6 py-2 rounded-full font-bold"
-              >
-                Login
-              </Link>
+              // Tombol Login hanya muncul jika BUKAN halaman login/register dan BUKAN kondisi sudah login
+              !isAuthPage && (
+                <Link href="/login" className="bg-teal-800 hover:bg-teal-900 text-white px-8 py-2 rounded-full font-bold transition shadow-lg">
+                  Login
+                </Link>
+              )
             )}
           </div>
 
-          {/* MOBILE BUTTON */}
-          <Button
-            variant="ghost"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
+          {/* MOBILE TOGGLE */}
+          <Button variant="ghost" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </Button>
         </div>
       </div>
 
       {/* MOBILE MENU */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white px-6 py-4 space-y-4">
-          {!isAuthPage &&
-            navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block font-bold"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-
-          {!token && isLoginPage && (
-            <Link href="/register" className="block font-bold text-teal-800">
-              Register
+        <div className="md:hidden bg-white/95 backdrop-blur-2xl p-6 space-y-4 border-b border-teal-100 animate-in slide-in-from-top duration-300">
+          {!isAuthPage && navLinks.map((link) => (
+            <Link
+              key={link.id}
+              href={link.href}
+              className={`block text-2xl font-black ${activeNav === link.id ? "text-teal-800" : "text-teal-900/30"}`}
+              onClick={(e) => handleScroll(e, link.href)}
+            >
+              {link.label}
             </Link>
-          )}
-
-          {!token && isRegisterPage && (
-            <Link href="/login" className="block font-bold text-teal-800">
-              Login
-            </Link>
-          )}
+          ))}
+          {}
         </div>
       )}
     </nav>
