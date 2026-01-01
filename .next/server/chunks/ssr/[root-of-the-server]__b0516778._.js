@@ -1,3 +1,0 @@
-module.exports=[93695,(a,b,c)=>{b.exports=a.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},43502,a=>{a.n(a.i(13801))},89077,a=>{a.n(a.i(47157))},76382,a=>{a.n(a.i(78032))},42365,a=>{a.n(a.i(87355))},27753,a=>{a.n(a.i(16715))},70079,a=>{a.n(a.i(28575))},71197,a=>{"use strict";var b=a.i(9205);function c(){return(0,b.jsx)("div",{children:"ViewGame"})}function d(){return(0,b.jsx)(c,{})}a.i(63382),a.s(["default",()=>d],71197)}];
-
-//# sourceMappingURL=%5Broot-of-the-server%5D__b0516778._.js.map
