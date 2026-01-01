@@ -1,4 +1,4 @@
-// File: C:\Users\AMNT08\OneDrive\Dokumen\Project Amri\FrontEnd_CEG\app\(homepage)\layout.js
+// File: C:\file kuliah\SI CEG\frontend\app\(homepage)\layout.js
 import * as entry from '../../../../app/(homepage)/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

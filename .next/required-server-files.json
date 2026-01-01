@@ -106,7 +106,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\AMNT08",
+    "outputFileTracingRoot": "C:\\file kuliah\\SI CEG\\frontend",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -164,7 +164,7 @@
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 15,
+      "cpus": 11,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -296,12 +296,12 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
     "turbopack": {
-      "root": "C:\\Users\\AMNT08"
+      "root": "C:\\file kuliah\\SI CEG\\frontend"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "C:\\Users\\AMNT08\\OneDrive\\Dokumen\\Project Amri\\FrontEnd_CEG",
-  "relativeAppDir": "OneDrive\\Dokumen\\Project Amri\\FrontEnd_CEG",
+  "appDir": "C:\\file kuliah\\SI CEG\\frontend",
+  "relativeAppDir": "",
   "files": [
     ".next\\routes-manifest.json",
     ".next\\server\\pages-manifest.json",

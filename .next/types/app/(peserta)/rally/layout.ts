@@ -1,4 +1,4 @@
-// File: C:\Users\AMNT08\OneDrive\Dokumen\Project Amri\FrontEnd_CEG\app\(peserta)\rally\layout.js
+// File: C:\file kuliah\SI CEG\frontend\app\(peserta)\rally\layout.js
 import * as entry from '../../../../../app/(peserta)/rally/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

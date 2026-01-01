@@ -1,4 +1,4 @@
-// File: C:\Users\AMNT08\OneDrive\Dokumen\Project Amri\FrontEnd_CEG\app\(penpos)\pos\layout.js
+// File: C:\file kuliah\SI CEG\frontend\app\(penpos)\pos\layout.js
 import * as entry from '../../../../../app/(penpos)/pos/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
