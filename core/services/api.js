@@ -7,7 +7,7 @@ const axiosInstance = createAxiosInstance();
 
 export const auth = {
   login: (data) =>
-    handleRequest(axiosInstance.post("/api/auth/login", data)),
+    handleRequest(axiosInstance.post("/api/api/auth/login", data)),
 
   // FUNGSI REGISTER BARU
   register: (data) =>
@@ -48,6 +48,15 @@ export const rally = {
 export const battleAbn = {
   getCard: (data) =>
     handleRequest(axiosInstance.post("/api/user/abn/get-card", data)),
+
+  getReadyCard: (data) =>
+    handleRequest(axiosInstance.post("/api/user/abn/get-ready-card", data)),
+
+  checkReadyCard: (data) =>
+    handleRequest(axiosInstance.post("/api/user/abn/check-ready-card", data)),
+
+  resultSelectedCard: (data) =>
+    handleRequest(axiosInstance.post("/api/user/abn/get-selected-card", data)),
 };
 
 export const admin = {
