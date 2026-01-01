@@ -27,7 +27,7 @@ import { useRouter } from "next/navigation";
 
 const getStatusConfig = (status) => {
     switch (status) {
-        case "KOSONG":
+        case "MENUNGGU":
             return {
                 color: "text-emerald-400",
                 badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
@@ -175,7 +175,7 @@ export default function ListGame() {
                                     key={post.penpos_id}
                                     className={`
                     group relative overflow-hidden transition-all duration-300
-                    bg-zinc-900/40 backdrop-blur-md border border-zinc-800
+                    bg-zinc-900/40 backdroap-blur-md border border-zinc-800
                     ${interactive ? `${typeGlow} cursor-pointer` : "opacity-60 cursor-not-allowed grayscale-[0.5]"}
                   `}
                                 >

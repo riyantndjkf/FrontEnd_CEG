@@ -95,6 +95,8 @@ export default function WaitingListView() {
                 const response = await API.rally.checkAcc();
 
                 if (response?.data?.success === true) {
+                    const game_sessions = response?.data?.data;
+                    localStorage.setItem("game_sessions", game_sessions);
                     router.push(`/rally/${currentPostId}/battle-abn`);
                 }
 
