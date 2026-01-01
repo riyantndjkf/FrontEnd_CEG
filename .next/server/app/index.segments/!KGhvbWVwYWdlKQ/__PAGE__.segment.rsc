@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[4615,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/2c076f148d9397e9.js"],"ClientPageRoot"]
-3:I[34734,["/_next/static/chunks/28b894294e0dabad.js","/_next/static/chunks/6c037c04084ae4b3.js","/_next/static/chunks/1a403a4ce2d16600.js","/_next/static/chunks/fce8bfa126c8613f.js","/_next/static/chunks/2973ce3a922427af.js","/_next/static/chunks/9df79e507807ad22.js","/_next/static/chunks/6b7919dcc51f86c3.js","/_next/static/chunks/ff6275c615e3b790.js","/_next/static/chunks/9f3ff4861e1ddef6.js","/_next/static/chunks/fbf155d4a5f7532c.js","/_next/static/chunks/1b04939855ff6ae5.js"],"default"]
-6:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/2c076f148d9397e9.js"],"OutletBoundary"]
+2:I[1304,[],"ClientPageRoot"]
+3:I[830,["4215","static/chunks/4215-b9ef7441964b955e.js","5337","static/chunks/5337-20e5558fb50d0f65.js","2834","static/chunks/2834-096f540fb62f3ab4.js","4607","static/chunks/4607-aceba2d713e9efc2.js","6609","static/chunks/6609-11a2791869254575.js","3769","static/chunks/3769-a0f3311171b5cf25.js","5772","static/chunks/5772-50a0f7b0ac1b739b.js","7536","static/chunks/7536-34ca98d8e8bc5099.js","8500","static/chunks/8500-27ab90e35aa7c15c.js","4379","static/chunks/4379-52d865ddb3a01f71.js","1424","static/chunks/app/(homepage)/page-b0c9f41f22d1fed8.js"],"default"]
+6:I[484,[],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"buildId":"Qdu9p7livNIwXXTLdMi5F","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/fbf155d4a5f7532c.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/1b04939855ff6ae5.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"TzOl770EQtd903C1IzMQC","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],null,["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
