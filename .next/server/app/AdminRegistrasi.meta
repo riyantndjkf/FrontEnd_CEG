@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/AdminRegistrasi/layout,_N_T_/AdminRegistrasi/page,_N_T_/AdminRegistrasi"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/AdminRegistrasi/__PAGE__",
+    "/AdminRegistrasi",
+    "/_index",
+    "/_head"
+  ]
+}

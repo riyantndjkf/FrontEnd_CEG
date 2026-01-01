@@ -1,0 +1,20 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(admin)/admin/page": "app/(admin)/admin/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(auth)/register/page": "app/(auth)/register/page.js",
+  "/(admin)/admin/team/[teamId]/page": "app/(admin)/admin/team/[teamId]/page.js",
+  "/AdminRegistrasi/page": "app/AdminRegistrasi/page.js",
+  "/(homepage)/page": "app/(homepage)/page.js",
+  "/(penpos)/pos/[id]/result/page": "app/(penpos)/pos/[id]/result/page.js",
+  "/(penpos)/pos/page": "app/(penpos)/pos/page.js",
+  "/(peserta)/rally/answer-the-question/page": "app/(peserta)/rally/answer-the-question/page.js",
+  "/(peserta)/rally/[id]/battle-abn/page": "app/(peserta)/rally/[id]/battle-abn/page.js",
+  "/(peserta)/rally/chemical-plant-battle/page": "app/(peserta)/rally/chemical-plant-battle/page.js",
+  "/(peserta)/rally/[id]/waiting-list/page": "app/(peserta)/rally/[id]/waiting-list/page.js",
+  "/(peserta)/rally/sort-the-process/page": "app/(peserta)/rally/sort-the-process/page.js",
+  "/(peserta)/rally/page": "app/(peserta)/rally/page.js",
+  "/(peserta)/rally/structure-of-atomic/page": "app/(peserta)/rally/structure-of-atomic/page.js"
+}
