@@ -1,5 +1,5 @@
 var R=require("../../../../chunks/ssr/[turbopack]_runtime.js")("server/app/(peserta)/rally/answer-the-question/page.js")
-R.c("server/chunks/ssr/[root-of-the-server]__03d7ee6b._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__b0516778._.js")
 R.c("server/chunks/ssr/OneDrive_Dokumen_Project Amri_FrontEnd_CEG_adef3e27._.js")
 R.c("server/chunks/ssr/OneDrive_Dokumen_Project Amri_FrontEnd_CEG_05adb901._.js")
 R.c("server/chunks/ssr/[root-of-the-server]__14e21987._.js")
