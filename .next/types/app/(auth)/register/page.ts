@@ -1,4 +1,4 @@
-// File: C:\Users\AMNT08\OneDrive\Dokumen\Project Amri\FrontEnd_CEG\app\(auth)\register\page.js
+// File: C:\file kuliah\SI CEG\frontend\app\(auth)\register\page.js
 import * as entry from '../../../../../app/(auth)/register/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

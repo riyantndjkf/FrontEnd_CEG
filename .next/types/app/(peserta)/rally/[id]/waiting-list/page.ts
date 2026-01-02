@@ -1,4 +1,4 @@
-// File: C:\Users\AMNT08\OneDrive\Dokumen\Project Amri\FrontEnd_CEG\app\(peserta)\rally\[id]\waiting-list\page.js
+// File: C:\file kuliah\SI CEG\frontend\app\(peserta)\rally\[id]\waiting-list\page.js
 import * as entry from '../../../../../../../app/(peserta)/rally/[id]/waiting-list/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
